@@ -1,0 +1,3 @@
+https://dsharpplus.emzi0767.com/articles/getting_started.html
+
+https://github.com/DSharpPlus/Example-Bots
