@@ -1,4 +1,7 @@
-﻿// TODO: Refresh API token
+﻿// TODO: Add events
+// TODO: Add status command
+
+// TODO: Refresh API token
 // TODO: Add debug output for each part of the initial load?
 
 using System;
@@ -56,6 +59,10 @@ namespace PotatoBot
             // Hook up some events
             // TODO: Setup moar events
             this.Client.Ready += Events.Client_Ready;
+            this.Client.MessageCreated += Events.Message_Created;
+            //this.Client.GuildMemberAdded += 
+            //this.Client.GuildMemberUpdated +=
+            this.Client.
             //this.Client.GuildAvailable += this.Client_GuildAvailable;
             //this.Client.ClientErrored += this.Client_ClientError;
 

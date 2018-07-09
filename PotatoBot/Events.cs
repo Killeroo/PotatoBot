@@ -24,6 +24,26 @@ namespace PotatoBot
 
         #endregion
 
+        // Replies to any mnention of name in chat
+        // TODO: Replace with json prefix
+        public static Task Message_Created(MessageCreateEventArgs e)
+        {
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", e.Message.Author.Username.ToString(), DateTime.Now); 
+
+            if (e.Message.Content.ToString().ToLower().Contains("potatobot")) {
+                e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", "Name detected: " + e.Message.ToString(), DateTime.Now);
+                
+                if (e.Message.Content.ToString().ToLower().Contains("fuck you")) {
+                    e.Message.RespondAsync("Ey fuck you budday.");
+                }
+                if (e.Message.Content.ToString().ToLower().Contains("fag")) {
+                    e.Message.RespondAsync("Hey you don't know that pal.");
+                }
+            }
+
+            return Task.CompletedTask;
+        }
+
         #region Command events
 
         public static Task Command_Executed(CommandExecutionEventArgs e)
@@ -46,7 +66,7 @@ namespace PotatoBot
                 // Use embed for our response
                 var embed = new DiscordEmbedBuilder {
                     Title = "Command not found",
-                    Description = $"{emoji} Sire I do not know that command. Please consult 'potatobot help'. {emoji}",
+                    Description = $"{emoji} Sire I do not know that command. Please consult 'potatobot help'.{emoji}",
                     Color = new DiscordColor(0xFF0000)
                 };
                 await e.Context.RespondAsync("", embed: embed);
