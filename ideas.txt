@@ -14,6 +14,13 @@ emoji spam
 imitate user
 nickname people
 potato famine
+announcement
+smoking brb table
+
+cmds
+status
+how are you
+command not found message
 
 recall
 
