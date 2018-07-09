@@ -43,7 +43,7 @@ namespace DSPlus.Examples
             // users know we're working
             await ctx.TriggerTypingAsync();
 
-            var emoji = DiscordEmoji.FromName(ctx.Client, ":potato:");
+            var emoji = DiscordEmoji.FromName(ctx.Client, ":raised_back_of_hand:");
 
             // let's wrap the response into an embed
             var embed = new DiscordEmbedBuilder {
@@ -52,6 +52,22 @@ namespace DSPlus.Examples
                 Color = new DiscordColor(0xb79268)
             };
             await ctx.RespondAsync("", embed: embed);
+        }
+
+        [Command("purge")]
+        [Description("Example ping command")] // this will be displayed to tell users what this command does when they invoke help
+        [Aliases("potatopurge")] // alternative names for the command
+        public async Task Purge(CommandContext ctx) // this command takes no arguments
+        {
+            // let's trigger a typing indicator to let
+            // users know we're working
+            await ctx.TriggerTypingAsync();
+
+            // let's make the message a bit more colourful
+            var emoji = DiscordEmoji.FromName(ctx.Client, ":ping_pong:");
+
+            // respond with ping
+            await ctx.RespondAsync($"{emoji} Pong! Ping: {ctx.Client.Ping}ms");
         }
 
         [Command("ping")] // let's define this method as a command

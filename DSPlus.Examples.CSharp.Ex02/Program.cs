@@ -174,21 +174,20 @@ namespace DSPlus.Examples
             // occured in our client
             e.Client.DebugLogger.LogMessage(LogLevel.Error, "ExampleBot", $"Exception occured: {e.Exception.GetType()}: {e.Exception.Message}", DateTime.Now);
 
+            //// yes, the user lacks required permissions, 
+            //// let them know
 
-            // yes, the user lacks required permissions, 
-            // let them know
+            //var emoji = DiscordEmoji.FromName(e.Client, ":no_entry:");
 
-            var emoji = DiscordEmoji.FromName(e.Client, ":no_entry:");
-
-            // let's wrap the response into an embed
-            var embed = new DiscordEmbedBuilder {
-                Title = "Access denied",
-                Description = $"{emoji} You do not have the permissions required to execute this command.",
-                Color = new DiscordColor(0xFF0000) // red
-                                                   // there are also some pre-defined colors available
-                                                   // as static members of the DiscordColor struct
-            };
-            await e.Context.RespondAsync("", embed: embed);
+            //// let's wrap the response into an embed
+            //var embed = new DiscordEmbedBuilder {
+            //    Title = "Access denied",
+            //    Description = $"{emoji} You do not have the permissions required to execute this command.",
+            //    Color = new DiscordColor(0xFF0000) // red
+            //                                       // there are also some pre-defined colors available
+            //                                       // as static members of the DiscordColor struct
+            //};
+            //await e.Context.RespondAsync("", embed: embed);
 
             // since this method is not async, let's return
             // a completed task, so that no additional work

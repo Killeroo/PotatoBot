@@ -13,16 +13,32 @@ annoyatron - play shit music
 emoji spam
 imitate user
 nickname people
-potato famine
-announcement
+potato famine/purge
+- anounce with quote from potato famine
+- kick everyone in channel
+server announcement
 smoking brb table
+roll the dice
+only wokrs for unbaked ones
+- messge for unranked people
++ auto kicks unranked people who talk to bot
+
+use random greeting messages
 
 cmds
 status
+- uptime 
+- location?
+- ping?
+- Wrench emoiji
 how are you
 command not found message
 
-recall
+different greeting depending on day or night
+
+save logs as text files
+
+recall msg history
 
 potatobot active.
 i await your instructions
