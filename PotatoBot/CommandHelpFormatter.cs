@@ -31,8 +31,8 @@ namespace PotatoBot
         // Sets the name of the command 
         public IHelpFormatter WithCommandName(string name)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Command: "))
-                .AppendLine(Formatter.Bold(name))
+            this.MessageBuilder.Append(Formatter.Underline("Command:"))
+                .AppendLine(" " + Formatter.Bold(name))
                 .AppendLine();
 
             return this;
@@ -41,8 +41,8 @@ namespace PotatoBot
         // Sets the description of the command
         public IHelpFormatter WithDescription(string description)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Description: "))
-                .AppendLine(Formatter.Bold(description))
+            this.MessageBuilder.Append(Formatter.Underline("Description:"))
+                .AppendLine(" " + description)
                 .AppendLine();
 
             return this;
@@ -59,8 +59,8 @@ namespace PotatoBot
         // Sets the alias for the command
         public IHelpFormatter WithAliases(IEnumerable<string> aliases)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Aliases: "))
-                .AppendLine(Formatter.Italic(string.Join(", ", aliases)))
+            this.MessageBuilder.Append(Formatter.Underline("Aliases:"))
+                .AppendLine(" " + Formatter.Italic(string.Join(", ", aliases)))
                 .AppendLine();
 
             return this;
@@ -69,8 +69,8 @@ namespace PotatoBot
         // Sets the arguments required for this class
         public IHelpFormatter WithArguments(IEnumerable<CommandArgument> arguments)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Arguments: "))
-                .AppendLine(Formatter.Bold(string.Join(", ", arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.ToUserFriendlyName()})"))))
+            this.MessageBuilder.Append(Formatter.Underline("Arguments:"))
+                .AppendLine(" " + Formatter.Bold(string.Join(", ", arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.ToUserFriendlyName()})"))))
                 .AppendLine();
 
             return this;
@@ -79,8 +79,8 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Subcommands: "))
-                .AppendLine(Formatter.Italic(string.Join(", ", subcommands.Select(xc => xc.Name))))
+            this.MessageBuilder.Append(Formatter.Underline("Subcommands:"))
+                .AppendLine(" " + Formatter.Italic(string.Join(", ", subcommands.Select(xc => xc.Name))))
                 .AppendLine();
 
             return this;

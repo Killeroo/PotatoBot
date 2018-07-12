@@ -22,10 +22,17 @@ namespace PotatoBot
             return Task.CompletedTask;
         }
 
+        public static Task Client_Error(ClientErrorEventArgs e)
+        {
+            e.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"Exception occured: {e.Exception.GetType()}: {e.Exception.Message}", DateTime.Now);
+
+            return Task.CompletedTask;
+        }
+
         #endregion
 
         // Replies to any mnention of name in chat
-        // TODO: Replace with json prefix
+        // TODO: This event being fired fucks with the commands being executed, maybe we need a different event?
         public static Task Message_Created(MessageCreateEventArgs e)
         {
             e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", e.Message.Author.Username.ToString(), DateTime.Now); 
@@ -43,6 +50,33 @@ namespace PotatoBot
 
             return Task.CompletedTask;
         }
+
+        #region Guild events
+
+        public static Task Guild_Available(GuildCreateEventArgs e)
+        {
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Guild available: {e.Guild.Name}", DateTime.Now);
+
+            return Task.CompletedTask;
+        }
+
+        public static Task Guild_Member_Added(GuildMemberAddEventArgs e)
+        {
+            e.Member.SendMessageAsync($"Welcome to {e.Guild.Name} {e.Member.Mention}. For now you are but a fledling potato, but soon you may ascend. I am PotatoBot, guardian of this land. Fear my wrath.");
+            //e.Member.GrantRoleAsync(DiscordRole) // Potato fledgling role
+            return Task.CompletedTask;
+        }
+
+        public static Task Guild_Member_Updated(GuildMemberUpdateEventArgs e)
+        {
+            // Check for raise or fall in rank
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Member_Updated: {e.Member.Username}: {e.RolesBefore} -> {e.RolesAfter}", DateTime.Now);
+            e.Member.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
+
+            return Task.CompletedTask;
+        }
+
+        #endregion
 
         #region Command events
 
