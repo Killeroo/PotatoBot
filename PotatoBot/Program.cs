@@ -1,12 +1,4 @@
-﻿// TODO: Add events
-// TODO: Add status command
-// TODO: Seperate out startup
-
-// TODO: Refresh API token
-// TODO: Add debug output for each part of the initial load?
-// TODO: Check permissions of user
-
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +12,15 @@ namespace PotatoBot
 {
     class Program
     {
+        public const string VERSION = "0.3";
+        public static string StartTime;
+
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
 
         static void Main(string[] args)
         {
-            Console.WriteLine("PotatoBot Version 0.25");
+            StartTime = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year} - {DateTime.Now.Hour}:{DateTime.Now.Minute}";
 
             // Due to the nature of DSharpPlus, the bot needs to run in async
             // so we pipe out program class through an async method to run
@@ -36,73 +31,29 @@ namespace PotatoBot
         // Main bot method
         public async Task RunBotAsync()
         {
-            // Open our json config file
-            // TODO: Add check for config
-            //string jsonData = "";
-            //using (FileStream fs = File.OpenRead("config.json"))
-            //using (StreamReader sr = new StreamReader(fs, new UTF8Encoding(false))) {
-            //    jsonData = await sr.ReadToEndAsync();
-            //}
+            Console.WriteLine($"PotatoBot Version {VERSION}");
+
+            // Load config file & configure client
             ConfigJson cfgjson = ReadConfigFile("config.json");
-
-            // Load configuration data from it
-            //ConfigJson cfgjson = JsonConvert.DeserializeObject<ConfigJson>(jsonData);
-            //DiscordConfiguration cfg = new DiscordConfiguration {
-            //    Token = cfgjson.Token,
-            //    TokenType = TokenType.Bot,
-
-            //    AutoReconnect = true,
-            //    LogLevel = LogLevel.Debug, // TODO: Move to config?
-            //    UseInternalLogHandler = true
-            //};
             DiscordConfiguration cfg = SetupDiscordConfig(cfgjson);
-
-            // Instantiate our client
+            Console.WriteLine("Initiating discord client . . . ");
             this.Client = new DiscordClient(cfg);
-            Client.DebugLogger.LogMessage(LogLevel.Debug, "PotatoBot", "Initiating DiscordClient ...", DateTime.Now);
 
-
-            //// Hook up some events
-            //this.Client.Ready += Events.Client_Ready;
-            //this.Client.ClientErrored += Events.Client_Error;
-            ////this.Client.MessageCreated += Events.Message_Created; // Causing trip up?
-            //this.Client.GuildAvailable += Events.Guild_Available;
-            //this.Client.GuildMemberAdded += Events.Guild_Member_Added;
-            //this.Client.GuildMemberUpdated += Events.Guild_Member_Updated;
+            // Setup client events and commands
             SetupClientEvents();
-
-            // Setup command configuration
-            CommandsNextConfiguration ccfg = new CommandsNextConfiguration {
-                StringPrefix = cfgjson.CommandPrefix,
-
-                EnableDms = true,
-                EnableMentionPrefix = true
-            };
-            this.Commands = this.Client.UseCommandsNext(ccfg);
-
-            // Hook up some command events
-            this.Commands.CommandExecuted += Events.Command_Executed;
-            this.Commands.CommandErrored += Events.Command_Errored;
-
-            // Next, load/register our commands
-            // TODO: Add moar commands
-            this.Commands.RegisterCommands<UngrouppedCommands>();
-            //this.Commands.RegisterCommands<GroupedCommands>();
-            //this.Commands.RegisterCommands<ExecutableGroupCommands>();
-
-            // Setup our help command formatter
-            this.Commands.SetHelpFormatter<CommandHelpFormatter>();
+            SetupCommands(cfgjson);
 
             // Finally lets connect to discord
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "PotatoBot", "Connecting to discord server", DateTime.Now);
             await this.Client.ConnectAsync();
 
-            // This next line prevents premature quiting
+            //  Prevent immature async quiting
             await Task.Delay(-1);
         }
 
-        public ConfigJson ReadConfigFile(string path)
+        private ConfigJson ReadConfigFile(string path)
         {
-            Client.DebugLogger.LogMessage(LogLevel.Debug, "ReadConfigFile", $"Reading {path} ...", DateTime.Now);
+            Console.WriteLine($"Reading {path}");
             string data = "";
             try {
                 using (FileStream fs = File.OpenRead("config.json"))
@@ -110,7 +61,7 @@ namespace PotatoBot
                     data = sr.ReadToEnd();
                 }
             } catch (Exception e) {
-                Client.DebugLogger.LogMessage(LogLevel.Critical, "ReadConfigFile", $"Error reading config file: {e.GetType()}: {e.Message}", DateTime.Now);
+                Console.WriteLine($"Error reading config file: {e.GetType()}: {e.Message}");
                 Console.Read();
                 Environment.Exit(1);
             }
@@ -119,9 +70,9 @@ namespace PotatoBot
             return cfgjson;
         }
 
-        public DiscordConfiguration SetupDiscordConfig(ConfigJson config)
+        private DiscordConfiguration SetupDiscordConfig(ConfigJson config)
         {
-            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupDiscordConfig", $"Configuring discord client ...", DateTime.Now);
+            Console.WriteLine("Configuring client");
             DiscordConfiguration cfg = new DiscordConfiguration {
                 Token = config.Token,
                 TokenType = TokenType.Bot,
@@ -134,40 +85,71 @@ namespace PotatoBot
             return cfg;
         }
 
-        public void SetupClientEvents()
+        private void SetupClientEvents()
         {
-            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events ...", DateTime.Now);
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events", DateTime.Now);
             this.Client.Ready += Events.Client_Ready;
             this.Client.ClientErrored += Events.Client_Error;
             //this.Client.MessageCreated += Events.Message_Created; // Causing trip up?
             this.Client.GuildAvailable += Events.Guild_Available;
             this.Client.GuildMemberAdded += Events.Guild_Member_Added;
-            this.Client.GuildMemberUpdated += Events.Guild_Member_Updated;
+            this.Client.GuildMemberUpdated += this.Guild_Member_Updated;
         }
 
-        public void SetupCommands(ConfigJson config)
+        private void SetupCommands(ConfigJson config)
         {
             // Setup command configuration
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Configuring commands", DateTime.Now);
             CommandsNextConfiguration ccfg = new CommandsNextConfiguration {
                 StringPrefix = config.CommandPrefix,
 
+                CaseSensitive = false,
                 EnableDms = true,
                 EnableMentionPrefix = true
             };
             this.Commands = this.Client.UseCommandsNext(ccfg);
 
             // Hook up some command events
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Hooking up events", DateTime.Now);
             this.Commands.CommandExecuted += Events.Command_Executed;
             this.Commands.CommandErrored += Events.Command_Errored;
 
             // Next, load/register our commands
-            // TODO: Add moar commands
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Registering commands", DateTime.Now);
             this.Commands.RegisterCommands<UngrouppedCommands>();
             //this.Commands.RegisterCommands<GroupedCommands>();
             //this.Commands.RegisterCommands<ExecutableGroupCommands>();
 
             // Setup our help command formatter
+            Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Setting up HelpFormatter", DateTime.Now);
             this.Commands.SetHelpFormatter<CommandHelpFormatter>();
+        }
+
+        //TODO: Move this to own class (or make events class async
+        public async Task<Task> Guild_Member_Updated(GuildMemberUpdateEventArgs e)
+        {
+            // Quickly work out the sum of all role positions the user has
+            int totalPosBefore = 0, totalPosAfter = 0;
+            foreach (var role in e.RolesBefore) { totalPosBefore += role.Position; }
+            foreach (var role in e.RolesAfter) { totalPosAfter += role.Position; }
+            
+            // Announce to all text channels in the server
+            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Member_Updated: {e.Member.Username}: Role position total {totalPosBefore} -> {totalPosAfter}", DateTime.Now);
+            foreach (var channel in e.Guild.Channels) {
+                if (channel.Type == ChannelType.Text) {
+                    if (totalPosBefore < totalPosAfter) {
+                        // Accended 
+                        await channel.TriggerTypingAsync();
+                        await channel.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
+                    } else if (totalPosBefore > totalPosAfter) {
+                        // Descended
+                        await channel.TriggerTypingAsync();
+                        await channel.SendMessageAsync($"Shame on you {e.Member.Mention}. You have fallen from grace. May the potato Gods have mercy on you...");
+                    }
+                }
+            }
+
+            return Task.CompletedTask;
         }
     }
 }
