@@ -123,15 +123,13 @@ namespace PotatoBot
                 // Inform user that command isnt found
                 var emoji = DiscordEmoji.FromName(e.Context.Client, ":confused:");
                 var embed = new DiscordEmbedBuilder {
-                    Title = $"Command not found {emoji}",
-                    Description = $"Sire I do not know that command. Please consult 'potatobot help'.",
+                    Title = $"Sire I do not know that command. {emoji}",
+                    Description = "Please consult 'potatobot help'.",
                     ImageUrl = confusedLinks[rng.Next(confusedLinks.Length)],
                     Color = DiscordColor.DarkRed
                 };
                 await e.Context.RespondAsync("", embed: embed);
             }
-
-            
         }
 
         #endregion

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Fix permissions
+
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;

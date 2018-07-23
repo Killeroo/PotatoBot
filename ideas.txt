@@ -5,13 +5,12 @@ ban hammer/oribtal friendship cannon - countdown with emojis
 insult generator
 auto josh detection
 custom greeting to unbaked ones - address as master
-purge?
 introduce when joining unbaked one channel
 hello response
+message of the day
 celebrate, play music in channel
 annoyatron - play shit music
 emoji spam
-imitate user
 nickname people
 potato famine/purge
 - anounce with quote from potato famine
@@ -22,8 +21,12 @@ roll the dice
 only wokrs for unbaked ones
 - messge for unranked people
 + auto kicks unranked people who talk to bot
+count commands executed, mentions etc
 
 use random greeting messages
+
+rekt command
+cute
 
 cmds
 status

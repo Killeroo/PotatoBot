@@ -16,6 +16,11 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Greetings(CommandContext ctx)
         {
+            string[] greetingsPhrases = {
+                "Greetings master.",
+                "Pra"
+            };
+
             // Show typing symbol for PotatoBot
             await ctx.TriggerTypingAsync();
 
