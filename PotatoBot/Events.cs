@@ -31,26 +31,6 @@ namespace PotatoBot
 
         #endregion
 
-        // Replies to any mnention of name in chat
-        // TODO: This event being fired fucks with the commands being executed, maybe we need a different event?
-        public static Task Message_Created(MessageCreateEventArgs e)
-        {
-            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", e.Message.Author.Username.ToString(), DateTime.Now); 
-
-            if (e.Message.Content.ToString().ToLower().Contains("potatobot")) {
-                e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", "Name detected: " + e.Message.ToString(), DateTime.Now);
-                
-                if (e.Message.Content.ToString().ToLower().Contains("fuck you")) {
-                    e.Message.RespondAsync("Ey fuck you budday.");
-                }
-                if (e.Message.Content.ToString().ToLower().Contains("fag")) {
-                    e.Message.RespondAsync("Hey you don't know that pal.");
-                }
-            }
-
-            return Task.CompletedTask;
-        }
-
         #region Guild events
 
         public static Task Guild_Available(GuildCreateEventArgs e)

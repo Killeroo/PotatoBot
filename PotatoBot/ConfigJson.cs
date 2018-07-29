@@ -12,5 +12,8 @@ namespace PotatoBot
 
         [JsonProperty("prefix")]
         public string CommandPrefix { get; private set; }
+
+        [JsonProperty("loglevel")]
+        public string LogLevel { get; private set; }
     }
 }

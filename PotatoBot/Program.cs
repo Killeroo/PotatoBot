@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
@@ -14,11 +15,16 @@ namespace PotatoBot
 {
     class Program
     {
-        public const string VERSION = "0.3";
+        // Move to other class
+        public const string VERSION = "0.35";
         public static string StartTime;
+        public static int CommandsExecuted;
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
+
+        // Contains all async events
+        private AsyncEvents asyncEvents = new AsyncEvents();
 
         static void Main(string[] args)
         {
@@ -53,6 +59,8 @@ namespace PotatoBot
             await Task.Delay(-1);
         }
 
+        #region Setup code
+
         private ConfigJson ReadConfigFile(string path)
         {
             Console.WriteLine($"Reading {path}");
@@ -75,12 +83,25 @@ namespace PotatoBot
         private DiscordConfiguration SetupDiscordConfig(ConfigJson config)
         {
             Console.WriteLine("Configuring client");
+
+            // Setup loglevel based on config file string
+            LogLevel ll = new LogLevel();
+            switch (config.LogLevel) {
+                case "debug": ll = LogLevel.Debug; break;
+                case "info": ll = LogLevel.Info; break;
+                case "critical": ll = LogLevel.Critical; break;
+                case "error": ll = LogLevel.Error; break;
+                case "warning": ll = LogLevel.Warning; break;
+                default: ll = LogLevel.Info; break;
+            }
+
+            // Setup discord config object
             DiscordConfiguration cfg = new DiscordConfiguration {
                 Token = config.Token,
                 TokenType = TokenType.Bot,
 
                 AutoReconnect = true,
-                LogLevel = LogLevel.Debug, // TODO: Move to config?
+                LogLevel = ll,
                 UseInternalLogHandler = true
             };
 
@@ -92,10 +113,11 @@ namespace PotatoBot
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events", DateTime.Now);
             this.Client.Ready += Events.Client_Ready;
             this.Client.ClientErrored += Events.Client_Error;
+            //Timer ti = new Timer(TimerCallback);
             //this.Client.MessageCreated += Events.Message_Created; // Causing trip up?
             this.Client.GuildAvailable += Events.Guild_Available;
             this.Client.GuildMemberAdded += Events.Guild_Member_Added;
-            this.Client.GuildMemberUpdated += this.Guild_Member_Updated;
+            this.Client.GuildMemberUpdated += asyncEvents.Guild_Member_Updated;
         }
 
         private void SetupCommands(ConfigJson config)
@@ -127,31 +149,7 @@ namespace PotatoBot
             this.Commands.SetHelpFormatter<CommandHelpFormatter>();
         }
 
-        //TODO: Move this to own class (or make events class async
-        public async Task<Task> Guild_Member_Updated(GuildMemberUpdateEventArgs e)
-        {
-            // Quickly work out the sum of all role positions the user has
-            int totalPosBefore = 0, totalPosAfter = 0;
-            foreach (var role in e.RolesBefore) { totalPosBefore += role.Position; }
-            foreach (var role in e.RolesAfter) { totalPosAfter += role.Position; }
-            
-            // Announce to all text channels in the server
-            e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Member_Updated: {e.Member.Username}: Role position total {totalPosBefore} -> {totalPosAfter}", DateTime.Now);
-            foreach (var channel in e.Guild.Channels) {
-                if (channel.Type == ChannelType.Text) {
-                    if (totalPosBefore < totalPosAfter) {
-                        // Accended 
-                        await channel.TriggerTypingAsync();
-                        await channel.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
-                    } else if (totalPosBefore > totalPosAfter) {
-                        // Descended
-                        await channel.TriggerTypingAsync();
-                        await channel.SendMessageAsync($"Shame on you {e.Member.Mention}. You have fallen from grace. May the potato Gods have mercy on you...");
-                    }
-                }
-            }
+        #endregion
 
-            return Task.CompletedTask;
-        }
     }
 }
