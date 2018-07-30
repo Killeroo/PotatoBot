@@ -136,6 +136,7 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Purge(CommandContext ctx)
         {
+            //TODO: Fix permissions
             throw new NotImplementedException();
         }
 
@@ -146,6 +147,8 @@ namespace PotatoBot
                                 [Description("How long the poll should last.")] TimeSpan duration,
                                 [Description("What options should the poll have.")] params DiscordEmoji[] options)
         {
+            ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{ctx.Member.Username} started a poll between: {options.ToString()}", DateTime.Now);
+
             // Load interactivity module and poll options
             InteractivityModule interactivity = ctx.Client.GetInteractivityModule();
             var pollOptions = options.Select(xe => xe.ToString());
@@ -163,12 +166,43 @@ namespace PotatoBot
             }
 
             // Collect responses
-            ReactionCollectionContext pollResult = await interactivity.CollectReactionsAsync(msg, duration);
+            ReactionCollectionContext pollResult = await interactivity.CollectReactionsAsync(msg, duration); //TODO: Why this not working?
             var results = pollResult.Reactions.Where(xkvp => options.Contains(xkvp.Key))
                 .Select(xkvp => $"{xkvp.Key}: {xkvp.Value}");
 
             // Post response
             await ctx.RespondAsync(string.Join("\n", results));
+        }
+
+        [Command("rtd")]
+        [Description("Rolls a dice for a user")]
+        [Aliases("roll", "rollthedice")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task RollTheDice(CommandContext ctx)
+        {
+            Random rng = new Random();
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":game_die:");
+
+            await ctx.TriggerTypingAsync();
+            await ctx.RespondAsync($"{emoji} {ctx.Member.Mention} rolls {rng.Next(0, 101)} (0-100)");
+        }
+
+        [Command("announce")]
+        [Description("Announces a message to the server")]
+        [Aliases("say", "tell")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Announce(CommandContext ctx, [Description("What should be announced")] params string[] message)
+        {
+            string annoucement = string.Join(" ", message);
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tada:");
+            ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{ctx.Member.Username} announces \"{annoucement}\" to the server", DateTime.Now);
+
+            foreach (var channel in ctx.Guild.Channels) {
+                if (channel.Type == ChannelType.Text) { 
+                    await channel.TriggerTypingAsync();
+                    await channel.SendMessageAsync($"{emoji} Greetings inhabitants of {channel.Mention}. The great {ctx.Member.Username} announces that \"{annoucement}\". Praise be the word of the potato");
+                }
+            }
         }
     }
 }
