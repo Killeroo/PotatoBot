@@ -25,6 +25,7 @@ namespace PotatoBot
         public static Task Client_Error(ClientErrorEventArgs e)
         {
             e.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"Exception occured: {e.Exception.GetType()}: {e.Exception.Message}", DateTime.Now);
+            Stats.ClientErrors++;
 
             return Task.CompletedTask;
         }
@@ -73,6 +74,7 @@ namespace PotatoBot
         public async static Task Command_Errored(CommandErrorEventArgs e)
         {
             e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it encountered an error: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);
+            Stats.CommandErrors++;
 
             if (e.Exception is ChecksFailedException) {
 

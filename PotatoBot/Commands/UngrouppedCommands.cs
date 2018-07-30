@@ -16,17 +16,19 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Greetings(CommandContext ctx)
         {
+            Random rng = new Random();
             string[] greetingsPhrases = {
                 "Greetings master.",
-                "Pra"
+                "Praise be the potato.",
+                "I await your instructions.",
+                "I live to serve."
             };
 
             // Show typing symbol for PotatoBot
             await ctx.TriggerTypingAsync();
 
             // Send message
-            var emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
-            await ctx.RespondAsync($"{emoji} Greetings master.");
+            await ctx.RespondAsync(greetingsPhrases[rng.Next(greetingsPhrases.Length)]);
         }
 
         [Command("status")]
@@ -47,7 +49,10 @@ namespace PotatoBot
             embed.AddField("Ping", ctx.Client.Ping.ToString(), true);
             embed.AddField("Connected to", ctx.Guild.Name.ToString());
             embed.AddField("Server location", ctx.Guild.RegionId, true);
-            embed.AddField("Started @", Program.StartTime);
+            embed.AddField("Started @", Stats.StartTime);
+            //embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
+            embed.AddField("Command Errors", Stats.CommandErrors.ToString());
+            embed.AddField("Client Errors", Stats.ClientErrors.ToString());
             embed.WithColor(DiscordColor.Goldenrod);
             embed.WithFooter("<3 PotatoBot & Pals");
             await ctx.RespondAsync(embed: embed);
