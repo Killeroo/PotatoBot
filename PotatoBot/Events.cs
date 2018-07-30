@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Exceptions;
+using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Entities;
 
@@ -43,22 +44,14 @@ namespace PotatoBot
 
         public static Task Guild_Member_Added(GuildMemberAddEventArgs e)
         {
+            //DiscordRoleConverter converter = new DiscordRoleConverter();
+            //DiscordRole role;
+            //converter.TryConvert("fledgling potato", e.Member., role);
+            
             e.Member.SendMessageAsync($"Welcome to {e.Guild.Name} {e.Member.Mention}. For now you are but a fledling potato, but soon you may ascend. I am PotatoBot, guardian of this land. Fear my wrath.");
-            //e.Member.GrantRoleAsync(new Disco) // Potato fledgling role
+            //e.Member.GrantRoleAsync(DiscordRoleConverter.) // Potato fledgling role
             return Task.CompletedTask;
         }
-
-        //public async Task Guild_Member_Updated(GuildMemberUpdateEventArgs e)
-        //{
-        //    // Check for raise or fall in rank
-        //    e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Member_Updated: {e.Member.Username}: {e.RolesBefore.ToString()} -> {e.RolesAfter.ToString()}", DateTime.Now);
-        //    //e.Member.Guild.Channels($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
-        //    foreach (var channel in e.Guild.Channels) {
-        //        await channel.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
-        //    }
-
-        //    return Task.CompletedTask;
-        //}
 
         #endregion
 
@@ -71,6 +64,7 @@ namespace PotatoBot
             return Task.CompletedTask;
         }
 
+        // TEST
         public async static Task Command_Errored(CommandErrorEventArgs e)
         {
             e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it encountered an error: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PotatoBot
+﻿namespace PotatoBot
 {
     /// <summary>
     /// Stores all potatobots stats
