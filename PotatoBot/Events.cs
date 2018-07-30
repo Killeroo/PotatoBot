@@ -31,6 +31,45 @@ namespace PotatoBot
             return Task.CompletedTask;
         }
 
+        public static Task Message_Created(MessageCreateEventArgs e)
+        {
+            // Count potatobot mentions
+            if (e.Message.Content.ToLower().Contains("potatobot")) {
+                e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Mentioned: [{e.Author.Username}] \"{e.Message.Content.ToString()}\"", DateTime.Now);
+                Stats.Mentions++;
+            }
+
+            // TODO: Check permissions
+
+            // Check the first word doesnt contain potatobot 
+            // So we dont trip up any of the commands stuff
+            var splitWords = e.Message.Content.ToString().Split(" ");
+            if (!splitWords[0].ToLower().Contains("potatobot") && e.Message.Content.ToLower().Contains("potatobot")) {
+                
+                // Check for some arbitary questions or commands
+                if (e.Message.Content.ToLower().Contains("hi") ||
+                    e.Message.Content.ToLower().Contains("yo") ||
+                    e.Message.Content.ToLower().Contains("hello") ||
+                    e.Message.Content.ToLower().Contains("sup") ||
+                    e.Message.Content.ToLower().Contains("yoo") ||
+                    e.Message.Content.ToLower().Contains("howdy") ||
+                    e.Message.Content.ToLower().Contains("wassap")) {
+
+                    Random rng = new Random();
+                    string[] greetingsPhrases = {
+                        "Greetings master.",
+                        "Praise be the potato.",
+                        "I await your instructions.",
+                        "I live to serve."
+                    };
+
+                    e.Channel.SendMessageAsync(greetingsPhrases[rng.Next(greetingsPhrases.Length)]);
+                }
+            }
+
+            return Task.CompletedTask;
+        }
+
         #endregion
 
         #region Guild events
@@ -44,12 +83,9 @@ namespace PotatoBot
 
         public static Task Guild_Member_Added(GuildMemberAddEventArgs e)
         {
-            //DiscordRoleConverter converter = new DiscordRoleConverter();
-            //DiscordRole role;
-            //converter.TryConvert("fledgling potato", e.Member., role);
-            
-            e.Member.SendMessageAsync($"Welcome to {e.Guild.Name} {e.Member.Mention}. For now you are but a fledling potato, but soon you may ascend. I am PotatoBot, guardian of this land. Fear my wrath.");
-            //e.Member.GrantRoleAsync(DiscordRoleConverter.) // Potato fledgling role
+            e.Member.GrantRoleAsync(e.Guild.Roles[2]); // TEST
+            e.Member.SendMessageAsync($"Welcome to {e.Guild.Name} {e.Member.Mention}. For now you are but a fledgling potato, but soon you may ascend. I am PotatoBot, guardian of this land. Fear my wrath.");
+
             return Task.CompletedTask;
         }
 
@@ -64,7 +100,7 @@ namespace PotatoBot
             return Task.CompletedTask;
         }
 
-        // TEST
+
         public async static Task Command_Errored(CommandErrorEventArgs e)
         {
             e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it encountered an error: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);

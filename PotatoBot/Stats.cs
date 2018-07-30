@@ -7,7 +7,7 @@
     {
         public static string StartTime;
         public static string PCName;
-        public static int CommandsExecuted;
+        public static int Mentions;
         public static int CommandErrors;
         public static int ClientErrors;
     }

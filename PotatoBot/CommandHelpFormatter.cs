@@ -78,8 +78,8 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Subcommands:"))
-                .AppendLine(" " + Formatter.Italic(string.Join(", ", subcommands.Select(xc => xc.Name))))
+            this.MessageBuilder.Append(Formatter.Underline("Subcommands:\n - "))
+                .AppendLine(" " + Formatter.Italic(string.Join("\n - ", subcommands.Select(xc => xc.Name))))
                 .AppendLine();
 
             return this;

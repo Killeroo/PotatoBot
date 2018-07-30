@@ -39,6 +39,7 @@ namespace PotatoBot
         {
             await ctx.TriggerTypingAsync();
 
+            // Construct embed
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tools:");
             var embed = new DiscordEmbedBuilder {
                 Title = $"{emoji} Status",
@@ -54,10 +55,58 @@ namespace PotatoBot
             embed.AddField("Started @", Stats.StartTime);
             embed.AddField("Running on", Stats.PCName);
             //embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
+            embed.AddField("Mentions", Stats.Mentions.ToString());
             embed.AddField("Command Errors", Stats.CommandErrors.ToString(), true);
             embed.AddField("Client Errors", Stats.ClientErrors.ToString(), true);
             embed.WithColor(DiscordColor.Goldenrod);
             embed.WithFooter("<3 PotatoBot & Pals");
+
+            // Display embed
+            await ctx.RespondAsync(embed: embed);
+        }
+
+        [Command("changelog")]
+        [Description("Shows current changes made to potatobot")]
+        [Aliases("changes")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Changelog(CommandContext ctx)
+        {
+            await ctx.TriggerTypingAsync();
+
+            // Create embed
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tools:");
+            var embed = new DiscordEmbedBuilder {
+                Title = $"{emoji} Changelog",
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = "Praise be the potato",
+                }
+            };
+            embed.AddField("Version 0.5" +
+                "- Added response to hi" +
+                "- Auto role assignment on first join" +
+                "- Now tracks mentions", 
+                "- Added changelog command\n" +
+                "- Did up announcement command");
+            embed.AddField("Version 0.4",
+                "- Added roll the dice command (rtd)\n" +
+                "- Added announce command\n" +
+                "- Added poll command\n" +
+                "- Updated status and statistics command\n" +
+                "- Refactoring and cleanup\n");
+            embed.AddField("Version 0.3",
+                "- Added more events\n" +
+                "- Added message logging\n" +
+                "- Reorganised startup\n");
+            embed.AddField("Version 0.2",
+                "- Added greetings command\n" +
+                "- Add basic events\n" +
+                "- Removed examplebot code\n" +
+                "- Added Command help formatter\n");
+            embed.AddField("Version 0.1",
+                "- Initial release");
+            embed.WithColor(DiscordColor.Goldenrod);
+
+            // Present the embed
             await ctx.RespondAsync(embed: embed);
         }
 
@@ -189,18 +238,27 @@ namespace PotatoBot
 
         [Command("announce")]
         [Description("Announces a message to the server")]
-        [Aliases("say", "tell")]
+        [Aliases("say", "tell", "yell")]
         [RequireRolesAttribute("unbaked one")]
         public async Task Announce(CommandContext ctx, [Description("What should be announced")] params string[] message)
         {
             string annoucement = string.Join(" ", message);
-            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tada:");
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":trumpet:");
             ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{ctx.Member.Username} announces \"{annoucement}\" to the server", DateTime.Now);
+
+            var embed = new DiscordEmbedBuilder {
+                Title = $"{emoji} Announcement",
+                Color = DiscordColor.Orange,
+                Description = Formatter.Bold(annoucement) + " - " + Formatter.Italic(ctx.Member.Username),
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = "Praise be the potato",
+                }
+            };
 
             foreach (var channel in ctx.Guild.Channels) {
                 if (channel.Type == ChannelType.Text) { 
                     await channel.TriggerTypingAsync();
-                    await channel.SendMessageAsync($"{emoji} Greetings inhabitants of {channel.Mention}. The great {ctx.Member.Username} announces that \"{annoucement}\". Praise be the word of the potato");
+                    await channel.SendMessageAsync(embed: embed);
                 }
             }
         }

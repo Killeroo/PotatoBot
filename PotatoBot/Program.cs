@@ -14,7 +14,7 @@ namespace PotatoBot
     class Program
     {
         // Move to other class
-        public const string VERSION = "0.4";
+        public const string VERSION = "0.5";
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
@@ -111,8 +111,7 @@ namespace PotatoBot
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events", DateTime.Now);
             this.Client.Ready += Events.Client_Ready;
             this.Client.ClientErrored += Events.Client_Error;
-            //Timer ti = new Timer(TimerCallback);
-            //this.Client.MessageCreated += Events.Message_Created; // Causing trip up?
+            this.Client.MessageCreated += Events.Message_Created;
             this.Client.GuildAvailable += Events.Guild_Available;
             this.Client.GuildMemberAdded += Events.Guild_Member_Added;
             this.Client.GuildMemberUpdated += asyncEvents.Guild_Member_Updated;
