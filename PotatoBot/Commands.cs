@@ -5,6 +5,7 @@ using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
 
 namespace PotatoBot
 {
@@ -38,9 +39,10 @@ namespace PotatoBot
         {
             await ctx.TriggerTypingAsync();
 
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tools:");
             var embed = new DiscordEmbedBuilder {
-                Title = "Status",
-                ImageUrl = "https://i.ytimg.com/vi/cXzZDHa8i_g/maxresdefault.jpg",//"http://www.stickpng.com/assets/images/58582c01f034562c582205ff.png",
+                Title = $"{emoji} Status",
+                ImageUrl = "https://i.imgur.com/SFmnXiA.png", 
                 ThumbnailUrl = "https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg"
                 
             };
@@ -50,9 +52,10 @@ namespace PotatoBot
             embed.AddField("Connected to", ctx.Guild.Name.ToString());
             embed.AddField("Server location", ctx.Guild.RegionId, true);
             embed.AddField("Started @", Stats.StartTime);
+            embed.AddField("Running on", Stats.PCName);
             //embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
-            embed.AddField("Command Errors", Stats.CommandErrors.ToString());
-            embed.AddField("Client Errors", Stats.ClientErrors.ToString());
+            embed.AddField("Command Errors", Stats.CommandErrors.ToString(), true);
+            embed.AddField("Client Errors", Stats.ClientErrors.ToString(), true);
             embed.WithColor(DiscordColor.Goldenrod);
             embed.WithFooter("<3 PotatoBot & Pals");
             await ctx.RespondAsync(embed: embed);
@@ -74,7 +77,6 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                Title = "We're All Fools, So Lets Dance, Baby",
                 ImageUrl = danceLinks[rng.Next(danceLinks.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -99,11 +101,74 @@ namespace PotatoBot
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
 
+        [Command("eyebleach")]
+        [Description("Show a random cute gif")]
+        [Aliases("cute")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Eyebleach(CommandContext ctx)
+        {
+            Random rng = new Random();
+            string[] cuteLinks = {
+                "https://i.imgur.com/dJt6R2m.gif",
+                "https://i.redd.it/5mvhyjwspvb11.jpg",
+                "https://i.imgur.com/oVzjfsJ.gif",
+                "https://i.imgur.com/M2SipsG.gif",
+                "https://i.imgur.com/uK2ibur.gif",
+                "https://i.redd.it/mcb5aia2pva11.jpg",
+                "https://i.redd.it/el6qj0ks6ta11.jpg",
+                "https://i.imgur.com/1VwVgyi.gif",
+                "https://i.imgur.com/l7zFf2u.gif",
+                "https://i.redd.it/wfo733tpke711.jpg",
+                "https://i.imgur.com/5GFKN0z.gif",
+                "https://i.imgur.com/23cSCsr.gif",
+                "https://i.imgur.com/rubjA1m.gif",
+                "https://i.imgur.com/4cgSS0U.gif"
+            };
+
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = cuteLinks[rng.Next(cuteLinks.Length)]
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
         [Command("purge")]
         [RequireRolesAttribute("unbaked one")]
         public async Task Purge(CommandContext ctx)
         {
             throw new NotImplementedException();
+        }
+
+        [Command("poll")]
+        [Description("Run a poll with reactions.")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Poll(CommandContext ctx, 
+                                [Description("How long the poll should last.")] TimeSpan duration,
+                                [Description("What options should the poll have.")] params DiscordEmoji[] options)
+        {
+            // Load interactivity module and poll options
+            InteractivityModule interactivity = ctx.Client.GetInteractivityModule();
+            var pollOptions = options.Select(xe => xe.ToString());
+
+            // Display the poll
+            var embed = new DiscordEmbedBuilder {
+                Title = "Poll Time!",
+                Description = "Choose your fighter: " + string.Join(" ", pollOptions)
+            };
+            DiscordMessage msg = await ctx.RespondAsync(embed: embed);
+
+            // Add options as reactions
+            for (int i = 0; i < options.Length; i++) {
+                await msg.CreateReactionAsync(options[i]);
+            }
+
+            // Collect responses
+            ReactionCollectionContext pollResult = await interactivity.CollectReactionsAsync(msg, duration);
+            var results = pollResult.Reactions.Where(xkvp => options.Contains(xkvp.Key))
+                .Select(xkvp => $"{xkvp.Key}: {xkvp.Value}");
+
+            // Post response
+            await ctx.RespondAsync(string.Join("\n", results));
         }
     }
 }

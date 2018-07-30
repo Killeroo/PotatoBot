@@ -10,6 +10,7 @@ namespace PotatoBot
     public static class Stats
     {
         public static string StartTime;
+        public static string PCName;
         public static int CommandsExecuted;
         public static int CommandErrors;
         public static int ClientErrors;

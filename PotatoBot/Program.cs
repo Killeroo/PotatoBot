@@ -10,6 +10,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using Newtonsoft.Json;
+using DSharpPlus.Interactivity;
 
 namespace PotatoBot
 {
@@ -27,6 +28,7 @@ namespace PotatoBot
         static void Main(string[] args)
         {
             Stats.StartTime = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year} - {DateTime.Now.Hour}:{DateTime.Now.Minute}";
+            Stats.PCName = Environment.MachineName;
 
             // Due to the nature of DSharpPlus, the bot needs to run in async
             // so we pipe out program class through an async method to run
@@ -46,6 +48,7 @@ namespace PotatoBot
             this.Client = new DiscordClient(cfg);
 
             // Setup client events and commands
+            SetupInteractivity();
             SetupClientEvents();
             SetupCommands(cfgjson);
 
@@ -145,6 +148,16 @@ namespace PotatoBot
             // Setup our help command formatter
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Setting up HelpFormatter", DateTime.Now);
             this.Commands.SetHelpFormatter<CommandHelpFormatter>();
+        }
+
+        private void SetupInteractivity()
+        {
+            // Setup interactivity with some default options
+            this.Client.UseInteractivity(new InteractivityConfiguration {
+                PaginationBehaviour = TimeoutBehaviour.Ignore,
+                PaginationTimeout = TimeSpan.FromMinutes(5),
+                Timeout = TimeSpan.FromMinutes(2)
+            });
         }
 
         #endregion
