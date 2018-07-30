@@ -81,10 +81,12 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
-            embed.AddField("Version 0.5" +
+            embed.AddField("Version 0.5.1",
+                "- Fixed some small typos");
+            embed.AddField("Version 0.5",
                 "- Added response to hi" +
                 "- Auto role assignment on first join" +
-                "- Now tracks mentions", 
+                "- Now tracks mentions" +
                 "- Added changelog command\n" +
                 "- Did up announcement command");
             embed.AddField("Version 0.4",
