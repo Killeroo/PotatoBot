@@ -96,6 +96,7 @@ namespace PotatoBot
         public static Task Command_Executed(CommandExecutionEventArgs e)
         {
             e.Context.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{e.Context.User.Username} successfully executed '{e.Command.QualifiedName}'", DateTime.Now);
+            Stats.CommandsExecuted++;
 
             return Task.CompletedTask;
         }

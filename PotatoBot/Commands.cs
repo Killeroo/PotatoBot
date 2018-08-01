@@ -54,8 +54,8 @@ namespace PotatoBot
             embed.AddField("Server location", ctx.Guild.RegionId, true);
             embed.AddField("Started @", Stats.StartTime);
             embed.AddField("Running on", Stats.PCName);
-            //embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
             embed.AddField("Mentions", Stats.Mentions.ToString());
+            embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
             embed.AddField("Command Errors", Stats.CommandErrors.ToString(), true);
             embed.AddField("Client Errors", Stats.ClientErrors.ToString(), true);
             embed.WithColor(DiscordColor.Goldenrod);
@@ -81,8 +81,11 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.2",
+                "- Added lol command" +
+                "- Added commands executed");
             embed.AddField("Version 0.5.1",
-                "- Fixed some small typos");
+                 "- Fixed some small typos");
             embed.AddField("Version 0.5",
                 "- Added response to hi" +
                 "- Auto role assignment on first join" +
@@ -129,6 +132,35 @@ namespace PotatoBot
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = danceLinks[rng.Next(danceLinks.Length)]
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("lol")]
+        [Description("hehehehehehehhe")]
+        [Aliases("lel", "lul", "lil", "lewl")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Lol(CommandContext ctx)
+        {
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = "https://i.imgur.com/ULasYGL.png",
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("orgasm")]
+        [Description("er... ?")]
+        [Aliases("urgh", "mmm", "ooo", "o")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Orgasm(CommandContext ctx)
+        {
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = "https://i.ytimg.com/vi/8QjGrBipxhU/hqdefault.jpg",
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
+                }
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
