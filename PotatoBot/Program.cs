@@ -14,7 +14,7 @@ namespace PotatoBot
     class Program
     {
         // Move to other class
-        public const string VERSION = "0.5.2";
+        public const string VERSION = "0.5.3";
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
@@ -24,7 +24,7 @@ namespace PotatoBot
 
         static void Main(string[] args)
         {
-            Stats.StartTime = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year} - {DateTime.Now.Hour}:{DateTime.Now.Minute}";
+            Stats.StartTime = DateTime.Now;
             Stats.PCName = Environment.MachineName;
 
             // Due to the nature of DSharpPlus, the bot needs to run in async

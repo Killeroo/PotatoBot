@@ -52,7 +52,7 @@ namespace PotatoBot
             embed.AddField("Ping", ctx.Client.Ping.ToString(), true);
             embed.AddField("Connected to", ctx.Guild.Name.ToString());
             embed.AddField("Server location", ctx.Guild.RegionId, true);
-            embed.AddField("Started @", Stats.StartTime);
+            embed.AddField("Uptime", (DateTime.Now - Stats.StartTime).ToString());
             embed.AddField("Running on", Stats.PCName);
             embed.AddField("Mentions", Stats.Mentions.ToString());
             embed.AddField("Commands Executed", Stats.CommandsExecuted.ToString());
@@ -81,15 +81,18 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.3",
+                "- Fixed formatting in changelog\n" +
+                "- Added some more gifs\n");
             embed.AddField("Version 0.5.2",
-                "- Added lol command" +
-                "- Added commands executed");
-            embed.AddField("Version 0.5.1",
+                "- Added lol command\n" +
+                "- Added commands executed\n");
+            embed.AddField("Version 0.5.1\n",
                  "- Fixed some small typos");
             embed.AddField("Version 0.5",
-                "- Added response to hi" +
-                "- Auto role assignment on first join" +
-                "- Now tracks mentions" +
+                "- Added response to hi\n" +
+                "- Auto role assignment on first join\n" +
+                "- Now tracks mentions\n" +
                 "- Added changelog command\n" +
                 "- Did up announcement command");
             embed.AddField("Version 0.4",
@@ -174,7 +177,8 @@ namespace PotatoBot
             string[] boobLinks = {
                 "https://media.giphy.com/media/cnQoYYnMyDMLS/giphy.gif",
                 "http://gifimage.net/wp-content/uploads/2018/05/space-dandy-honey-gif-11.gif",
-                "https://i1.kym-cdn.com/photos/images/newsfeed/000/673/939/a52.gif"
+                "https://i1.kym-cdn.com/photos/images/newsfeed/000/673/939/a52.gif",
+                "https://i.imgur.com/gallery/fQxv6Qr.gif"
             };
 
             await ctx.TriggerTypingAsync();
@@ -205,7 +209,23 @@ namespace PotatoBot
                 "https://i.imgur.com/5GFKN0z.gif",
                 "https://i.imgur.com/23cSCsr.gif",
                 "https://i.imgur.com/rubjA1m.gif",
-                "https://i.imgur.com/4cgSS0U.gif"
+                "https://i.imgur.com/4cgSS0U.gif",
+                "https://media.giphy.com/media/xUOrwlLIfc6LJ3FKpO/giphy.gif",
+                "https://media.giphy.com/media/1CrejqXxVZs9q/giphy.gif",
+                "https://media.giphy.com/media/ecdfptYe6UiCA/giphy.gif",
+                "https://media.giphy.com/media/VkMV9TldsPd28/giphy.gif",
+                "https://media.giphy.com/media/qquLeC57bczQI/giphy.gif",
+                "https://media.giphy.com/media/1xwDsv6rT10B2/giphy.gif",
+                "https://media.giphy.com/media/3rl5r5VjqL41G/giphy.gif",
+                "https://media.giphy.com/media/Q8dsVXknnZ7rO/giphy.gif",
+                "https://media.giphy.com/media/Q1Mjzqspnz6Qo/giphy.gif",
+                "https://media.giphy.com/media/xUPGcxnrq8MrJ37PgY/giphy.gif",
+                "https://media.giphy.com/media/vJRMuf14ygIec/giphy.gif",
+                "https://media.giphy.com/media/97Tb3UAuBuxZm/giphy.gif",
+                "https://media.giphy.com/media/3o7aCUeBMEpKn0i1La/giphy.gif",
+                "https://media.giphy.com/media/rIbcJr6fhyUoM/giphy.gif",
+                "https://media.giphy.com/media/11upUw4jBRn6hi/giphy.gif",
+                "https://media.giphy.com/media/11r6bmaFz3vI9a/giphy.gif"
             };
 
             await ctx.TriggerTypingAsync();

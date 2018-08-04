@@ -1,11 +1,13 @@
-﻿namespace PotatoBot
+﻿using System;
+
+namespace PotatoBot
 {
     /// <summary>
     /// Stores all potatobots stats
     /// </summary>
     public static class Stats
     {
-        public static string StartTime;
+        public static DateTime StartTime;
         public static string PCName;
         public static int Mentions;
         public static int CommandsExecuted;
