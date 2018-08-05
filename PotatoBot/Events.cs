@@ -95,7 +95,7 @@ namespace PotatoBot
 
         public static Task Command_Executed(CommandExecutionEventArgs e)
         {
-            e.Context.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{e.Context.User.Username} successfully executed '{e.Command.QualifiedName}'", DateTime.Now);
+            e.Context.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"[{e.Context.User.Username}] successfully executed '{e.Command.QualifiedName}'", DateTime.Now);
             Stats.CommandsExecuted++;
 
             return Task.CompletedTask;
@@ -104,10 +104,12 @@ namespace PotatoBot
 
         public async static Task Command_Errored(CommandErrorEventArgs e)
         {
-            e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it encountered an error: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);
+            e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"[{e.Context.User.Username}] tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it encountered an error: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);
             Stats.CommandErrors++;
 
             if (e.Exception is ChecksFailedException) {
+
+                e.Context.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", $"Kicking low role user [{e.Context.User.Username}] ...", DateTime.Now);
 
                 // Kick lower user for speaking to potatobot
                 var emoji = DiscordEmoji.FromName(e.Context.Client, ":skull_crossbones:");

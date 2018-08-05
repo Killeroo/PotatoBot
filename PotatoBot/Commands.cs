@@ -81,6 +81,10 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.4",
+                "- Added TotalBiscuit command\n" +
+                "- Some refactoring\n" +
+                "- More gifs\n");
             embed.AddField("Version 0.5.3",
                 "- Fixed formatting in changelog\n" +
                 "- Added some more gifs\n");
@@ -125,7 +129,7 @@ namespace PotatoBot
         public async Task Dance(CommandContext ctx)
         {
             Random rng = new Random();
-            string[] danceLinks = {
+            string[] links = {
                 "https://rosesturnblog.files.wordpress.com/2014/12/dandy-butt-dancing.gif",
                 "https://i.pinimg.com/originals/c3/e0/c2/c3e0c2c8fe4f6358d1c2c5f716096369.gif",
                 "https://i.pinimg.com/originals/c2/31/c2/c231c28caeda52c315d8993b6cb59607.gif",
@@ -134,7 +138,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = danceLinks[rng.Next(danceLinks.Length)]
+                ImageUrl = links[rng.Next(links.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -158,9 +162,15 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Orgasm(CommandContext ctx)
         {
+            Random rng = new Random();
+            string[] links = {
+                "https://cdn.discordapp.com/attachments/463604511315984386/475695215324299266/Screenshot-2018-3-26_John_Mayer_Gives_Blues_Guitar_Lessons_to_his_fans_Instagram_Live_Stream_16_Marc.png",
+                "https://i.ytimg.com/vi/8QjGrBipxhU/hqdefault.jpg"
+            };
+
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = "https://i.ytimg.com/vi/8QjGrBipxhU/hqdefault.jpg",
+                ImageUrl = links[rng.Next(links.Length)],
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
                 }
@@ -174,7 +184,7 @@ namespace PotatoBot
         public async Task Boobies(CommandContext ctx)
         {
             Random rng = new Random();
-            string[] boobLinks = {
+            string[] links = {
                 "https://media.giphy.com/media/cnQoYYnMyDMLS/giphy.gif",
                 "http://gifimage.net/wp-content/uploads/2018/05/space-dandy-honey-gif-11.gif",
                 "https://i1.kym-cdn.com/photos/images/newsfeed/000/673/939/a52.gif",
@@ -183,7 +193,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = boobLinks[rng.Next(boobLinks.Length)]
+                ImageUrl = links[rng.Next(links.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -195,7 +205,7 @@ namespace PotatoBot
         public async Task Eyebleach(CommandContext ctx)
         {
             Random rng = new Random();
-            string[] cuteLinks = {
+            string[] links = {
                 "https://i.imgur.com/dJt6R2m.gif",
                 "https://i.redd.it/5mvhyjwspvb11.jpg",
                 "https://i.imgur.com/oVzjfsJ.gif",
@@ -230,7 +240,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = cuteLinks[rng.Next(cuteLinks.Length)]
+                ImageUrl = links[rng.Next(links.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -300,6 +310,7 @@ namespace PotatoBot
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":trumpet:");
             ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"{ctx.Member.Username} announces \"{annoucement}\" to the server", DateTime.Now);
 
+            // Construct embed
             var embed = new DiscordEmbedBuilder {
                 Title = $"{emoji} Announcement",
                 Color = DiscordColor.Orange,
@@ -309,12 +320,45 @@ namespace PotatoBot
                 }
             };
 
+            // Delete command message
+            await ctx.Message.DeleteAsync();
+
+            // Send embed to all channels in guild
             foreach (var channel in ctx.Guild.Channels) {
                 if (channel.Type == ChannelType.Text) { 
-                    await channel.TriggerTypingAsync();
                     await channel.SendMessageAsync(embed: embed);
                 }
             }
+        }
+
+        [Command("tb")]
+        [Description("Summon our lord and savior, TotalBiscuit")]
+        [Aliases("totalbiscuit", "totalhalibut", "cynicalbrit", "johnbain")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task TB(CommandContext ctx)
+        {
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tophat:");
+            Random rng = new Random();
+            string[] links = {
+                "https://media.discordapp.net/attachments/463604511315984386/475694426623049758/WTF.png",
+                "https://pbs.twimg.com/media/BjJUJhOCIAIbvu8.jpg:large",
+                "https://vignette.wikia.nocookie.net/yogscast/images/6/66/TB.jpg/revision/latest?cb=20140818215911",
+                "https://verifiedtasks.com/wp-content/uploads/2018/05/john-totalbiscuit-bain-died-remembering-the-gaming-critic.jpg",
+                "https://questnews.it/wp-content/uploads/2018/05/totalbiscuit.jpg",
+                "https://d2g8igdw686xgo.cloudfront.net/29256636_15241260170_r.jpeg",
+                "https://i.ytimg.com/vi/hWlQaf7o1Lg/maxresdefault.jpg",
+                "https://im.tiscali.cz/games/2018/05/25/937684-bain_otvirak-653x367.jpg",
+                "http://i.imgur.com/jI4wNF5.jpg"
+            };
+
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = links[rng.Next(links.Length)],
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = $"RIP Lord Biscuit, the cynical king {emoji} ",
+                }
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
         }
     }
 }
