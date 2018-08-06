@@ -81,6 +81,11 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.5",
+                "- Updated TB command footer\n" +
+                "- Added ping pong command (from example-bots)\n" +
+                "- Added some aliases \n" +
+                "- Deleting of announce message\n");
             embed.AddField("Version 0.5.4",
                 "- Added TotalBiscuit command\n" +
                 "- Some refactoring\n" +
@@ -158,7 +163,7 @@ namespace PotatoBot
 
         [Command("orgasm")]
         [Description("er... ?")]
-        [Aliases("urgh", "mmm", "ooo", "o")]
+        [Aliases("urgh", "mmm", "ooo", "o", "oo")]
         [RequireRolesAttribute("unbaked one")]
         public async Task Orgasm(CommandContext ctx)
         {
@@ -302,7 +307,7 @@ namespace PotatoBot
 
         [Command("announce")]
         [Description("Announces a message to the server")]
-        [Aliases("say", "tell", "yell")]
+        [Aliases("say", "tell", "yell", "shout")]
         [RequireRolesAttribute("unbaked one")]
         public async Task Announce(CommandContext ctx, [Description("What should be announced")] params string[] message)
         {
@@ -335,9 +340,9 @@ namespace PotatoBot
         [Description("Summon our lord and savior, TotalBiscuit")]
         [Aliases("totalbiscuit", "totalhalibut", "cynicalbrit", "johnbain")]
         [RequireRolesAttribute("unbaked one")]
-        public async Task TB(CommandContext ctx)
+        public async Task TotalBiscuit(CommandContext ctx)
         {
-            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tophat:");
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
             Random rng = new Random();
             string[] links = {
                 "https://media.discordapp.net/attachments/463604511315984386/475694426623049758/WTF.png",
@@ -355,10 +360,22 @@ namespace PotatoBot
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = links[rng.Next(links.Length)],
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
-                    Text = $"RIP Lord Biscuit, the cynical king {emoji} ",
+                    Text = $"RIP John Bain, 8th July 1984 - 23th May 2018 {emoji} ",
                 }
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("ping")]
+        [Description("Displays potatobot's current ping")]
+        [Aliases("pong")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Ping(CommandContext ctx)
+        {
+            await ctx.TriggerTypingAsync();
+
+            // respond with current ping
+            await ctx.RespondAsync($"{DiscordEmoji.FromName(ctx.Client, ":ping_pong:")} Pong! Ping: {ctx.Client.Ping}ms");
         }
     }
 }
