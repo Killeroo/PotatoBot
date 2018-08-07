@@ -149,5 +149,9 @@ namespace PotatoBot
         }
 
         #endregion
+
+        #region Timer events
+
+        #endregion
     }
 }

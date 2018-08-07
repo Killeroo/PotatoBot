@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using Newtonsoft.Json;
@@ -21,6 +22,8 @@ namespace PotatoBot
 
         // Contains all async events
         private AsyncEvents asyncEvents = new AsyncEvents();
+
+        private Timer timer;
 
         static void Main(string[] args)
         {
@@ -154,6 +157,28 @@ namespace PotatoBot
                 PaginationTimeout = TimeSpan.FromMinutes(5),
                 Timeout = TimeSpan.FromMinutes(2)
             });
+        }
+
+        private void SetupTimer(TimeSpan alertTime)
+        {
+            timer = new Timer(TimerEvent);
+
+            DateTime now = DateTime.Now;
+            DateTime target = DateTime.Today.AddHours(10.0);
+
+            if (now > target) {
+                target = target.AddDays(1.0);
+            }
+
+            int timeTillTarget = (int)((target - now).TotalMilliseconds);
+
+            timer.Change(timeTillTarget, Timeout.Infinite);
+        }
+
+        private void TimerEvent(object state)
+        {
+
+            Client.DebugLogger.LogMessage(LogLevel.Warning, "PotatoBot", "event fired", DateTime.Now);
         }
 
         #endregion
