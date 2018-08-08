@@ -15,7 +15,7 @@ namespace PotatoBot
     class Program
     {
         // Move to other class
-        public const string VERSION = "0.5.5";
+        public const string VERSION = "0.5.6";
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
@@ -51,6 +51,7 @@ namespace PotatoBot
             SetupInteractivity();
             SetupClientEvents();
             SetupCommands(cfgjson);
+            SetupTimer(new TimeSpan(12, 0, 0));
 
             // Finally lets connect to discord
             Client.DebugLogger.LogMessage(LogLevel.Debug, "PotatoBot", "Connecting to discord server", DateTime.Now);
@@ -164,7 +165,7 @@ namespace PotatoBot
             timer = new Timer(TimerEvent);
 
             DateTime now = DateTime.Now;
-            DateTime target = DateTime.Today.AddHours(10.0);
+            DateTime target = DateTime.Today.AddHours(12.0);
 
             if (now > target) {
                 target = target.AddDays(1.0);

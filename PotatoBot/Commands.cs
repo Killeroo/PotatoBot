@@ -81,6 +81,8 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.6",
+                "- Added bullshit command\n");
             embed.AddField("Version 0.5.5",
                 "- Updated TB command footer\n" +
                 "- Added ping pong command (from example-bots)\n" +
@@ -376,6 +378,27 @@ namespace PotatoBot
 
             // respond with current ping
             await ctx.RespondAsync($"{DiscordEmoji.FromName(ctx.Client, ":ping_pong:")} Pong! Ping: {ctx.Client.Ping}ms");
+        }
+
+        [Command("bullshit")]
+        [Description("Calls it how it is")]
+        [Aliases("bs", "horseshiet", "horseshit")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task BS(CommandContext ctx)
+        {
+            Random rng = new Random();
+            string[] links = {
+                "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif",
+                "https://media.giphy.com/media/5xtDarDFtx1uQhOC44E/giphy.gif",
+                "https://media.giphy.com/media/zk4ZIGs8CYTYs/giphy.gif"
+            };
+
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = links[rng.Next(links.Length)],
+                Color = DiscordColor.Gray
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
         }
     }
 }
