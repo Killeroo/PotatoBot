@@ -84,6 +84,13 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.6",
+                "- Added urbandictonary command\n" +
+                "- Added karlpilkington command\n" +
+                "- Added toggleerrormsg command\n" +
+                "- Added some more gifs\n" +
+                "- Switched names of some commands\n" +
+                "- Removed reply trigger from gif commands\n "); 
             embed.AddField("Version 0.5.8",
                 "- Updated togethertube command");
             embed.AddField("Version 0.5.7",
