@@ -4,7 +4,9 @@ using System.Text;
 
 namespace PotatoBot
 {
-    // Contains static links to all gifs used by potatobot
+    /// <summary>
+    /// Contains static links to all gifs used by potatobot
+    /// </summary>
     public class GIF
     {
 
