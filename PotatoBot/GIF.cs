@@ -77,7 +77,11 @@ namespace PotatoBot
         public static string[] BULLSHIT_LINKS = {
             "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif",
             "https://media.giphy.com/media/5xtDarDFtx1uQhOC44E/giphy.gif",
-            "https://media.giphy.com/media/zk4ZIGs8CYTYs/giphy.gif"
+            "https://media.giphy.com/media/zk4ZIGs8CYTYs/giphy.gif",
+            "https://media.giphy.com/media/jzkYKG3cMrIwE/giphy.gif",
+            "https://media.giphy.com/media/fW0ZxSrXkqQTe/giphy.gif",
+            "https://media.giphy.com/media/yDrdRp8oLy4r6/giphy.gif",
+            "https://media.giphy.com/media/yDChhXhGE6Ma4/giphy.gif"
         };
 
         public static string[] COMMANDNOTFOUND_LINKS = {
