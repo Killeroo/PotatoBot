@@ -82,6 +82,8 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.8",
+                "- Updated togethertube command");
             embed.AddField("Version 0.5.7",
                 "- Removed timer code\n" +
                 "- Added 8ball command\n" +
@@ -431,7 +433,7 @@ namespace PotatoBot
 
         [Command("youtube")]
         [Description("Potatobot calls upon the dark void and summons a mad land where you can watch youtube together")]
-        [Aliases("togethertube", "watch", "watch2gether")]
+        [Aliases("togethertube", "watch", "watch2gether", "yt", "yout00b")]
         [RequireRolesAttribute("unbaked one")]
         //TODO: Replace with dynamic room creation like:
         //https://github.com/Kwoth/NadekoBot/blob/f274af8ba20e1630ff663320ca6235114aa8fd46/NadekoBot.Core/Modules/Utility/Utility.cs#L46
@@ -440,7 +442,7 @@ namespace PotatoBot
             var target = new Uri("https://togethertube.com/rooms/potatotheater");
             var embed = new DiscordEmbedBuilder {
                 Title = $"{DiscordEmoji.FromName(ctx.Client, ":tv:")} Together Tube",
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.IndianRed,
                 Url = target.AbsoluteUri,
                 ThumbnailUrl = "https://togethertube.com/assets/img/favicons/favicon-160x160.png",
                 Description = $"Sire, I have summoned your personnal TogetherTube room: {target}" 
