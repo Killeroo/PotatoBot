@@ -44,7 +44,7 @@ namespace PotatoBot
             // Check the first word doesnt contain potatobot 
             // So we dont trip up any of the commands stuff
             var splitWords = e.Message.Content.ToString().Split(" ");
-            if (!splitWords[0].ToLower().Contains("potatobot") && e.Message.Content.ToLower().Contains("potatobot")) {
+            if (!splitWords[0].ToLower().Contains("potatobot") && e.Message.Content.ToLower().Contains("potatobot") && !e.Author.IsBot) {
                 
                 // Check for some arbitary questions or commands
                 if (e.Message.Content.ToLower().Contains("hi") ||
@@ -147,10 +147,6 @@ namespace PotatoBot
                 await e.Context.RespondAsync("", embed: embed);
             }
         }
-
-        #endregion
-
-        #region Timer events
 
         #endregion
     }

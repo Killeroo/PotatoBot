@@ -6,6 +6,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
+using System.Net.Http;
 
 namespace PotatoBot
 {
@@ -81,6 +82,10 @@ namespace PotatoBot
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.5.7",
+                "- Removed timer code\n" +
+                "- Added 8ball command\n" +
+                "- Added togethertube command\n");
             embed.AddField("Version 0.5.6",
                 "- Added bullshit command\n");
             embed.AddField("Version 0.5.5",
@@ -145,6 +150,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
                 ImageUrl = links[rng.Next(links.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -158,6 +164,7 @@ namespace PotatoBot
         {
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
                 ImageUrl = "https://i.imgur.com/ULasYGL.png",
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -177,6 +184,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
                 ImageUrl = links[rng.Next(links.Length)],
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
@@ -200,7 +208,8 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = links[rng.Next(links.Length)]
+                ImageUrl = links[rng.Next(links.Length)],
+                Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -247,6 +256,7 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
                 ImageUrl = links[rng.Next(links.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -276,6 +286,7 @@ namespace PotatoBot
             // Display the poll
             var embed = new DiscordEmbedBuilder {
                 Title = "Poll Time!",
+                Color = DiscordColor.Gray,
                 Description = "Choose your fighter: " + string.Join(" ", pollOptions)
             };
             DiscordMessage msg = await ctx.RespondAsync(embed: embed);
@@ -305,6 +316,22 @@ namespace PotatoBot
 
             await ctx.TriggerTypingAsync();
             await ctx.RespondAsync($"{emoji} {ctx.Member.Mention} rolls {rng.Next(0, 101)} (0-100)");
+        }
+
+        [Command("8ball")]
+        [Description("Potatobot consults his magic 8ball")]
+        [Aliases("future")]
+        [RequireRolesAttribute("unbaked one")]
+        // Source: https://github.com/MonikaDiscord/Monika/blob/71b025237010da9e7c9a914721d9d75e1aad3cc4/modules/fun.py#L93
+        public async Task EightBall(CommandContext ctx)
+        {
+            Random rng = new Random();
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":8ball:");
+            string[] responses = new string[] {"Signs point to yes.", "Yes.", "Without a doubt.", "As I see it, yes.", "You may rely on it.", "It is decidedly so.", "Yes - definitely.", "It is certain.", "Most likely.", "Outlook good.",
+                                               "Reply hazy, try again.", "Concentrate and ask again.", "Better not tell you now.", "Cannot predict now.", "Ask again later.",
+                                               "My sources say no.", "Outlook not so good.", "Very doubtful.", "My reply is no.", "Don't count on it."};
+            await ctx.TriggerTypingAsync();
+            await ctx.RespondAsync($"{emoji} My magic 8ball says... '{responses[rng.Next(responses.Length)]}'");
         }
 
         [Command("announce")]
@@ -361,6 +388,7 @@ namespace PotatoBot
             await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = links[rng.Next(links.Length)],
+                Color = DiscordColor.Gray,
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"RIP John Bain, 8th July 1984 - 23th May 2018 {emoji} ",
                 }
@@ -381,7 +409,7 @@ namespace PotatoBot
         }
 
         [Command("bullshit")]
-        [Description("Calls it how it is")]
+        [Description("Potatobot calls it how it is")]
         [Aliases("bs", "horseshiet", "horseshit")]
         [RequireRolesAttribute("unbaked one")]
         public async Task BS(CommandContext ctx)
@@ -398,6 +426,26 @@ namespace PotatoBot
                 ImageUrl = links[rng.Next(links.Length)],
                 Color = DiscordColor.Gray
             };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("youtube")]
+        [Description("Potatobot calls upon the dark void and summons a mad land where you can watch youtube together")]
+        [Aliases("togethertube", "watch", "watch2gether")]
+        [RequireRolesAttribute("unbaked one")]
+        //TODO: Replace with dynamic room creation like:
+        //https://github.com/Kwoth/NadekoBot/blob/f274af8ba20e1630ff663320ca6235114aa8fd46/NadekoBot.Core/Modules/Utility/Utility.cs#L46
+        public async Task TogetherTube(CommandContext ctx)
+        {
+            var target = new Uri("https://togethertube.com/rooms/potatotheater");
+            var embed = new DiscordEmbedBuilder {
+                Title = $"{DiscordEmoji.FromName(ctx.Client, ":tv:")} Together Tube",
+                Color = DiscordColor.Gray,
+                Url = target.AbsoluteUri,
+                ThumbnailUrl = "https://togethertube.com/assets/img/favicons/favicon-160x160.png",
+                Description = $"Sire, I have summoned your personnal TogetherTube room: {target}" 
+            };
+
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
     }
