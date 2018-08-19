@@ -12,13 +12,14 @@ namespace PotatoBot
 {
     public class UngrouppedCommands
     {
+        private Random rng = new Random();
+
         [Command("greetings")]
         [Description("Say hi to potato bot")]
         [Aliases("hi", "yo", "yoyo", "sup")]
         [RequireRolesAttribute("unbaked one")]
         public async Task Greetings(CommandContext ctx)
         {
-            Random rng = new Random();
             string[] greetingsPhrases = {
                 "Greetings master.",
                 "Praise be the potato.",
@@ -142,8 +143,6 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Dance(CommandContext ctx)
         {
-            Random rng = new Random();
-            
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
                 ImageUrl = GIF.DANCE_LINKS[rng.Next(GIF.DANCE_LINKS.Length)]
@@ -170,8 +169,6 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task ooo(CommandContext ctx)
         {
-            Random rng = new Random();
-            
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
                 ImageUrl = GIF.OOO_LINKS[rng.Next(GIF.OOO_LINKS.Length)],
@@ -187,8 +184,6 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Boobies(CommandContext ctx)
         {
-            Random rng = new Random();
-            
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = GIF.BOOB_LINKS[rng.Next(GIF.BOOB_LINKS.Length)],
                 Color = DiscordColor.Gray
@@ -202,9 +197,6 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Cute(CommandContext ctx)
         {
-            Random rng = new Random();
-
-            await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
                 ImageUrl = GIF.CUTE_LINKS[rng.Next(GIF.CUTE_LINKS.Length)]
@@ -261,7 +253,6 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task RollTheDice(CommandContext ctx)
         {
-            Random rng = new Random();
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":game_die:");
 
             await ctx.TriggerTypingAsync();
@@ -309,7 +300,8 @@ namespace PotatoBot
 
             // Send embed to all channels in guild
             foreach (var channel in ctx.Guild.Channels) {
-                if (channel.Type == ChannelType.Text) { 
+                if (channel.Type == ChannelType.Text) {
+                    await channel.TriggerTypingAsync();
                     await channel.SendMessageAsync(embed: embed);
                 }
             }
@@ -322,9 +314,7 @@ namespace PotatoBot
         public async Task TotalBiscuit(CommandContext ctx)
         {
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
-            Random rng = new Random();
-
-            await ctx.TriggerTypingAsync();
+            
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = GIF.TOTALBISCUIT_LINKS[rng.Next(GIF.TOTALBISCUIT_LINKS.Length)],
                 Color = DiscordColor.Gray,
@@ -341,9 +331,8 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task Ping(CommandContext ctx)
         {
-            await ctx.TriggerTypingAsync();
-
             // respond with current ping
+            await ctx.TriggerTypingAsync();
             await ctx.RespondAsync($"{DiscordEmoji.FromName(ctx.Client, ":ping_pong:")} Pong! Ping: {ctx.Client.Ping}ms");
         }
 
@@ -353,11 +342,21 @@ namespace PotatoBot
         [RequireRolesAttribute("unbaked one")]
         public async Task BullShit(CommandContext ctx)
         {
-            Random rng = new Random();
-
-            await ctx.TriggerTypingAsync();
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = GIF.BULLSHIT_LINKS[rng.Next(GIF.BULLSHIT_LINKS.Length)],
+                Color = DiscordColor.Gray
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("karlpilkington")]
+        [Description("Potatobot calls it how it is")]
+        [Aliases("kp", "twat")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task KarlPilkington(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif",
                 Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
