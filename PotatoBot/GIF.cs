@@ -77,5 +77,14 @@ namespace PotatoBot
             "https://media.giphy.com/media/5xtDarDFtx1uQhOC44E/giphy.gif",
             "https://media.giphy.com/media/zk4ZIGs8CYTYs/giphy.gif"
         };
+
+        public static string[] COMMANDNOTFOUND_LINKS = {
+            "https://media.giphy.com/media/yFm0w98tu3ela/giphy.gif",
+            "https://thumbs.gfycat.com/DisastrousInsecureConch-size_restricted.gif",
+            "https://thumbs.gfycat.com/FewJointFish-size_restricted.gif",
+            "http://sailorsbeat.com/wp-content/uploads/2017/03/Dazed-Confused.gif",
+            "https://media1.tenor.com/images/2c7fa0bfa6a69bb45b1a1ad7e715a6d7/tenor.gif",
+            "https://i.redd.it/u2kjhbdnn0d11.gif"
+        };
     }
 }

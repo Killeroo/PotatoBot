@@ -351,7 +351,7 @@ namespace PotatoBot
 
         [Command("karlpilkington")]
         [Description("Potatobot calls it how it is")]
-        [Aliases("kp", "twat")]
+        [Aliases("kp", "twat", "pilkington")]
         [RequireRolesAttribute("unbaked one")]
         public async Task KarlPilkington(CommandContext ctx)
         {
@@ -380,6 +380,15 @@ namespace PotatoBot
             };
 
             await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("errors")]
+        [Description("Instructs Potatobot to not display any error messages")]
+        [Aliases("noerrors", "noerrormsg")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task ToggleCommandNotFoundMsg(CommandContext ctx)
+        {
+            Events.ShowCommandNotFoundMsg = !Events.ShowCommandNotFoundMsg;
         }
     }
 }

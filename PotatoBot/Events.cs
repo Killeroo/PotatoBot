@@ -14,6 +14,8 @@ namespace PotatoBot
     /// </summary>
     public static class Events
     {
+        public static bool ShowCommandNotFoundMsg { get; set; } = true;
+
         #region Client events
 
         public static Task Client_Ready(ReadyEventArgs e)
@@ -124,24 +126,16 @@ namespace PotatoBot
                 await e.Context.Member.RemoveAsync("You are not worthy of communicating with PotatoBot.");
             }
             
-            if (e.Exception is CommandNotFoundException ex) {
+            if (e.Exception is CommandNotFoundException ex && ShowCommandNotFoundMsg) {
 
                 Random rng = new Random();
-                string[] confusedLinks = {
-                    "https://media.giphy.com/media/yFm0w98tu3ela/giphy.gif",
-                    "https://thumbs.gfycat.com/DisastrousInsecureConch-size_restricted.gif",
-                    "https://thumbs.gfycat.com/FewJointFish-size_restricted.gif",
-                    "http://sailorsbeat.com/wp-content/uploads/2017/03/Dazed-Confused.gif",
-                    "https://media1.tenor.com/images/2c7fa0bfa6a69bb45b1a1ad7e715a6d7/tenor.gif",
-                    "https://i.redd.it/u2kjhbdnn0d11.gif"
-                };
 
                 // Inform user that command isnt found
                 var emoji = DiscordEmoji.FromName(e.Context.Client, ":confused:");
                 var embed = new DiscordEmbedBuilder {
                     Title = $"Sire I do not know that command. {emoji}",
                     Description = "Please consult 'potatobot help'.",
-                    ImageUrl = confusedLinks[rng.Next(confusedLinks.Length)],
+                    ImageUrl = GIF.COMMANDNOTFOUND_LINKS[rng.Next(GIF.COMMANDNOTFOUND_LINKS.Length)],
                     Color = DiscordColor.DarkRed
                 };
                 await e.Context.RespondAsync("", embed: embed);
