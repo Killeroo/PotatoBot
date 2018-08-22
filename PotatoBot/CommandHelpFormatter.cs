@@ -2,6 +2,7 @@
 using System.Text;
 using System.Linq;
 using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.CommandsNext.Entities;
@@ -14,17 +15,19 @@ namespace PotatoBot
     public class CommandHelpFormatter : IHelpFormatter
     {
         private StringBuilder MessageBuilder { get; }
+        private DiscordEmbedBuilder EmbedBuilder { get; }
 
         // Constructor
         public CommandHelpFormatter()
         {
             this.MessageBuilder = new StringBuilder();
+            this.EmbedBuilder = new DiscordEmbedBuilder();
         }
 
         // Builds the completed help message
         public CommandHelpMessage Build()
         {
-            return new CommandHelpMessage(this.MessageBuilder.ToString().Replace("\r\n", "\n"));
+            return new CommandHelpMessage(embed: EmbedBuilder);//this.MessageBuilder.ToString().Replace("\r\n", "\n") + embed.Build());
         }
 
         // Sets the name of the command 

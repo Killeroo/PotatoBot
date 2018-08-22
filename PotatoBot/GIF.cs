@@ -90,7 +90,8 @@ namespace PotatoBot
             "https://thumbs.gfycat.com/FewJointFish-size_restricted.gif",
             "http://sailorsbeat.com/wp-content/uploads/2017/03/Dazed-Confused.gif",
             "https://media1.tenor.com/images/2c7fa0bfa6a69bb45b1a1ad7e715a6d7/tenor.gif",
-            "https://i.redd.it/u2kjhbdnn0d11.gif"
+            "https://i.redd.it/u2kjhbdnn0d11.gif",
+            "https://cdn.drawception.com/images/panels/2013/11-2/eb21ZKCFrC-6.png"
         };
     }
 }
