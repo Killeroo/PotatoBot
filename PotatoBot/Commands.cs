@@ -426,7 +426,7 @@ namespace PotatoBot
 
                         // Build embed (not only use the first result)
                         var embed = new DiscordEmbedBuilder {
-                            Color = DiscordColor.Blue,
+                            Color = DiscordColor.Gold,
                             ThumbnailUrl = "http://i.imgur.com/nwERwQE.jpg",
                             Author = new DiscordEmbedBuilder.EmbedAuthor {
                                 //IconUrl = "http://i.imgur.com/nwERwQE.jpg",

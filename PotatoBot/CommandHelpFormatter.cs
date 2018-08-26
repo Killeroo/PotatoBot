@@ -14,28 +14,29 @@ namespace PotatoBot
     /// </summary>
     public class CommandHelpFormatter : IHelpFormatter
     {
-        private StringBuilder MessageBuilder { get; }
         private DiscordEmbedBuilder EmbedBuilder { get; }
 
         // Constructor
         public CommandHelpFormatter()
         {
-            this.MessageBuilder = new StringBuilder();
             this.EmbedBuilder = new DiscordEmbedBuilder();
+            EmbedBuilder.Color = DiscordColor.Goldenrod;
+            EmbedBuilder.ThumbnailUrl = "https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg";
+            EmbedBuilder.Footer = new DiscordEmbedBuilder.EmbedFooter {
+                Text = "<3 PotatoBot & Pals"
+            };
         }
 
         // Builds the completed help message
         public CommandHelpMessage Build()
         {
-            return new CommandHelpMessage(embed: EmbedBuilder);//this.MessageBuilder.ToString().Replace("\r\n", "\n") + embed.Build());
+            return new CommandHelpMessage(embed: EmbedBuilder);
         }
 
         // Sets the name of the command 
         public IHelpFormatter WithCommandName(string name)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Command:"))
-                .AppendLine(" " + Formatter.Bold(name))
-                .AppendLine();
+            this.EmbedBuilder.AddField("Name", name, true);
 
             return this;
         }
@@ -43,9 +44,7 @@ namespace PotatoBot
         // Sets the description of the command
         public IHelpFormatter WithDescription(string description)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Description:"))
-                .AppendLine(" " + description)
-                .AppendLine();
+            this.EmbedBuilder.AddField("Description", description);
 
             return this;
         }
@@ -53,7 +52,7 @@ namespace PotatoBot
         // Sets if the command can be executed without any other arguments
         public IHelpFormatter WithGroupExecutable()
         {
-            this.MessageBuilder.AppendLine(Formatter.Underline("This group is a standalone command."));
+            this.EmbedBuilder.AddField("This group is a standalone command", "");
 
             return this;
         }
@@ -61,9 +60,8 @@ namespace PotatoBot
         // Sets the alias for the command
         public IHelpFormatter WithAliases(IEnumerable<string> aliases)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Aliases:"))
-                .AppendLine(" " + Formatter.Italic(string.Join(", ", aliases)))
-                .AppendLine();
+            this.EmbedBuilder.AddField("Other names",
+                string.Join(", ", aliases), true);
 
             return this;
         }
@@ -71,9 +69,8 @@ namespace PotatoBot
         // Sets the arguments required for this class
         public IHelpFormatter WithArguments(IEnumerable<CommandArgument> arguments)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Arguments:"))
-                .AppendLine(" " + Formatter.Bold(string.Join(", ", arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.ToUserFriendlyName()})"))))
-                .AppendLine();
+            this.EmbedBuilder.AddField("Arguments",
+                string.Join(", ", arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.ToUserFriendlyName()})")));
 
             return this;
         }
@@ -81,9 +78,7 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            this.MessageBuilder.Append(Formatter.Underline("Subcommands:") + "\n -")
-                .AppendLine(" " + Formatter.Italic(string.Join("\n - ", subcommands.Select(xc => xc.Name))))
-                .AppendLine();
+            EmbedBuilder.AddField("Commands", string.Join("\n", subcommands.Select(xc => xc.Name)));
 
             return this;
         }

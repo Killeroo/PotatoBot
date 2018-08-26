@@ -13,4 +13,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Events\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
