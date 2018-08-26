@@ -39,12 +39,11 @@ namespace PotatoBot.Commands
                     // Check if there is anything there
                     if (results.Any()) {
 
-                        // Build embed (not only use the first result)
+                        // Build embed (only use the first result)
                         var embed = new DiscordEmbedBuilder {
                             Color = DiscordColor.Gold,
-                            ThumbnailUrl = "http://i.imgur.com/nwERwQE.jpg",
+                            ThumbnailUrl = Links.URBAN_DICTIONARY,
                             Author = new DiscordEmbedBuilder.EmbedAuthor {
-                                //IconUrl = "http://i.imgur.com/nwERwQE.jpg",
                                 Name = DiscordEmoji.FromName(ctx.Client, ":books:") + " " + results[0].Word
                             },
                             Description = results[0].Definition.Replace("[", "").Replace("]", ""),
@@ -65,6 +64,34 @@ namespace PotatoBot.Commands
             }
         }
 
-       
+        [Command("lmgtfy")]
+        [Description("Instructs Potatobot to search for a term on UrbanDictionary.com")]
+        [Aliases("google", "letmegooglethatforyou")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Lmgtfy(CommandContext ctx, [RemainingText] string query = null)
+        {
+            // TODO: Fix, totally broken
+            await ctx.TriggerTypingAsync();
+            await ctx.RespondAsync("This isnt working right now, go hit a programmer and I'll get right back on that");
+            return;
+
+            // Sanity check
+            if (string.IsNullOrEmpty(query)) {
+                return;
+            }
+
+            ctx.Client.DebugLogger.LogMessage(LogLevel.Debug, "PotatoBot", $"Creating lmgtfy link for {query} . . . ", DateTime.Now);
+            var link = "https://lmgtfy.com/?q=\"" + Uri.EscapeUriString(query) + "\"";
+            var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Green,
+                Author = new DiscordEmbedBuilder.EmbedAuthor {
+                    Name = "Let me google that for you",
+                    IconUrl = "https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png",
+                    Url = link
+                }
+            };
+            await ctx.TriggerTypingAsync();
+            await ctx.RespondAsync(embed: embed);
+        }
     }
 }

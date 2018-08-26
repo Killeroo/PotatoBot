@@ -11,6 +11,7 @@ namespace PotatoBot
     {
         public static string ICON_IMAGE = "https://i.imgur.com/jIdgJ4j.png"; // Backup: https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg
         public static string PREACH_OK = "https://i.imgur.com/SFmnXiA.png";
+        public static string URBAN_DICTIONARY = "http://i.imgur.com/nwERwQE.jpg";
 
         public static string[] DANCE_LINKS = {
             "https://rosesturnblog.files.wordpress.com/2014/12/dandy-butt-dancing.gif",
