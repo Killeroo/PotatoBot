@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Exceptions;
@@ -13,7 +14,7 @@ namespace PotatoBot.Events
     /// </summary>
     public static class StaticEvents
     {
-        public static bool ShowCommandNotFoundMsg { get; set; } = true;
+        public static bool ShowCommandNotFoundMsg { get; set; } = false;
 
         #region Client events
 
@@ -133,7 +134,7 @@ namespace PotatoBot.Events
                 var emoji = DiscordEmoji.FromName(e.Context.Client, ":confused:");
                 var embed = new DiscordEmbedBuilder {
                     Title = $"Sire I do not know that command. {emoji}",
-                    Description = "Please consult 'potatobot help'.",
+                    Description = "Please consult '/help'.",
                     ImageUrl = Links.COMMANDNOTFOUND_LINKS[rng.Next(Links.COMMANDNOTFOUND_LINKS.Length)],
                     Color = DiscordColor.DarkRed
                 };

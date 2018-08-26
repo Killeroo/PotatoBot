@@ -14,6 +14,8 @@ namespace PotatoBot.Commands
 {
     class Games
     {
+        private Random rng = new Random();
+
         [Command("poll")]
         [Description("Run a poll with reactions.")]
         [RequireRolesAttribute("unbaked one")]

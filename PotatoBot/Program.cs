@@ -26,8 +26,6 @@ namespace PotatoBot
         // Contains all async events
         private AsyncEvents asyncEvents = new AsyncEvents();
 
-        private Timer timer;
-
         static void Main(string[] args)
         {
             Stats.StartTime = DateTime.Now;
@@ -143,7 +141,6 @@ namespace PotatoBot
 
             // Next, load/register our commands
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Registering commands", DateTime.Now);
-            this.Commands.RegisterCommands<UngrouppedCommands>();
             this.Commands.RegisterCommands<Fun>();
             this.Commands.RegisterCommands<Utility>();
             this.Commands.RegisterCommands<Searches>();
