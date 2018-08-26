@@ -3,10 +3,15 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using Newtonsoft.Json;
 using DSharpPlus.Interactivity;
+
+using Newtonsoft.Json;
+
+using PotatoBot.Commands;
+using PotatoBot.Events;
 
 namespace PotatoBot
 {
@@ -110,11 +115,11 @@ namespace PotatoBot
         private void SetupClientEvents()
         {
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events", DateTime.Now);
-            this.Client.Ready += Events.Client_Ready;
-            this.Client.ClientErrored += Events.Client_Error;
-            this.Client.MessageCreated += Events.Message_Created;
-            this.Client.GuildAvailable += Events.Guild_Available;
-            this.Client.GuildMemberAdded += Events.Guild_Member_Added;
+            this.Client.Ready += StaticEvents.Client_Ready;
+            this.Client.ClientErrored += StaticEvents.Client_Error;
+            this.Client.MessageCreated += StaticEvents.Message_Created;
+            this.Client.GuildAvailable += StaticEvents.Guild_Available;
+            this.Client.GuildMemberAdded += StaticEvents.Guild_Member_Added;
             this.Client.GuildMemberUpdated += asyncEvents.Guild_Member_Updated;
         }
 
@@ -133,18 +138,20 @@ namespace PotatoBot
 
             // Hook up some command events
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Hooking up events", DateTime.Now);
-            this.Commands.CommandExecuted += Events.Command_Executed;
-            this.Commands.CommandErrored += Events.Command_Errored;
+            this.Commands.CommandExecuted += StaticEvents.Command_Executed;
+            this.Commands.CommandErrored += StaticEvents.Command_Errored;
 
             // Next, load/register our commands
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Registering commands", DateTime.Now);
             this.Commands.RegisterCommands<UngrouppedCommands>();
-            //this.Commands.RegisterCommands<GroupedCommands>();
-            //this.Commands.RegisterCommands<ExecutableGroupCommands>();
+            this.Commands.RegisterCommands<Fun>();
+            this.Commands.RegisterCommands<Utility>();
+            this.Commands.RegisterCommands<Searches>();
+            this.Commands.RegisterCommands<Games>();
 
             // Setup our help command formatter
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Setting up HelpFormatter", DateTime.Now);
-            this.Commands.SetHelpFormatter<CommandHelpFormatter>();
+            this.Commands.SetHelpFormatter<HelpFormatter>();
         }
 
         private void SetupInteractivity()

@@ -3,16 +3,15 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Exceptions;
-using DSharpPlus.CommandsNext.Converters;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Entities;
 
-namespace PotatoBot
+namespace PotatoBot.Events
 {
     /// <summary>
     /// Contains all event code for potatobot
     /// </summary>
-    public static class Events
+    public static class StaticEvents
     {
         public static bool ShowCommandNotFoundMsg { get; set; } = true;
 

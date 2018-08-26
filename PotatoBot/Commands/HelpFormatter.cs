@@ -12,12 +12,12 @@ namespace PotatoBot
     /// <summary>
     /// Generates a help message for a command
     /// </summary>
-    public class CommandHelpFormatter : IHelpFormatter
+    public class HelpFormatter : IHelpFormatter
     {
         private DiscordEmbedBuilder EmbedBuilder { get; }
 
         // Constructor
-        public CommandHelpFormatter()
+        public HelpFormatter()
         {
             this.EmbedBuilder = new DiscordEmbedBuilder();
             EmbedBuilder.Color = DiscordColor.Goldenrod;

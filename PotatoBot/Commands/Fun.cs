@@ -1,10 +1,146 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+
+using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 
 namespace PotatoBot.Commands
 {
-    class Fun
+    public class Fun
     {
+        private Random rng = new Random();
+
+        [Command("greetings")]
+        [Description("Say hi to potato bot")]
+        [Aliases("hi", "yo", "yoyo", "sup")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Greetings(CommandContext ctx)
+        {
+            string[] greetingsPhrases = {
+                "Greetings master.",
+                "Praise be the potato.",
+                "I await your instructions.",
+                "I live to serve."
+            };
+
+            // Show typing symbol for PotatoBot
+            await ctx.TriggerTypingAsync();
+
+            // Send message
+            await ctx.RespondAsync(greetingsPhrases[rng.Next(greetingsPhrases.Length)]);
+        }
+
+        [Command("dance")]
+        [Description("Instructs PotatoBot to initate dance routines")]
+        [Aliases("kickit")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Dance(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
+                ImageUrl = GIF.DANCE_LINKS[rng.Next(GIF.DANCE_LINKS.Length)]
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("lol")]
+        [Description("hehehehehehehhe")]
+        [Aliases("lel", "lul", "lil", "lewl")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Lol(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
+                ImageUrl = "https://i.imgur.com/ULasYGL.png",
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("ooo")]
+        [Description("er... ?")]
+        [Aliases("urgh", "mmm", "orgasm", "o", "oo")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task ooo(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
+                ImageUrl = GIF.OOO_LINKS[rng.Next(GIF.OOO_LINKS.Length)],
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
+                }
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("cute")]
+        [Description("Show a random cute gif")]
+        [Aliases("eyebleech")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Cute(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                Color = DiscordColor.Gray,
+                ImageUrl = GIF.CUTE_LINKS[rng.Next(GIF.CUTE_LINKS.Length)]
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("boobies")]
+        [Description("Erm... Don't look at me, I didn't program myself...")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Boobies(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = GIF.BOOB_LINKS[rng.Next(GIF.BOOB_LINKS.Length)],
+                Color = DiscordColor.Gray
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("tb")]
+        [Description("Summon our lord and savior, TotalBiscuit")]
+        [Aliases("totalbiscuit", "totalhalibut", "cynicalbrit", "johnbain")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task TotalBiscuit(CommandContext ctx)
+        {
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
+
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = GIF.TOTALBISCUIT_LINKS[rng.Next(GIF.TOTALBISCUIT_LINKS.Length)],
+                Color = DiscordColor.Gray,
+                Footer = new DiscordEmbedBuilder.EmbedFooter {
+                    Text = $"RIP John Bain, 8th July 1984 - 23th May 2018 {emoji} ",
+                }
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("bullshit")]
+        [Description("Potatobot calls it how it is")]
+        [Aliases("bs", "horseshiet", "horseshit")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task BullShit(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = GIF.BULLSHIT_LINKS[rng.Next(GIF.BULLSHIT_LINKS.Length)],
+                Color = DiscordColor.Gray
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("karlpilkington")]
+        [Description("Potatobot calls it how it is")]
+        [Aliases("kp", "twat", "pilkington")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task KarlPilkington(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder {
+                ImageUrl = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif",
+                Color = DiscordColor.Gray
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
+        }
     }
 }

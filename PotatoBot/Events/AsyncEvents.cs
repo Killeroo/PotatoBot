@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.EventArgs;
 
-namespace PotatoBot
+namespace PotatoBot.Events
 {
     /// <summary>
     /// Contains all async event code for potatobot
