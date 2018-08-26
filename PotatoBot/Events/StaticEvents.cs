@@ -134,7 +134,7 @@ namespace PotatoBot.Events
                 var embed = new DiscordEmbedBuilder {
                     Title = $"Sire I do not know that command. {emoji}",
                     Description = "Please consult 'potatobot help'.",
-                    ImageUrl = GIF.COMMANDNOTFOUND_LINKS[rng.Next(GIF.COMMANDNOTFOUND_LINKS.Length)],
+                    ImageUrl = Links.COMMANDNOTFOUND_LINKS[rng.Next(Links.COMMANDNOTFOUND_LINKS.Length)],
                     Color = DiscordColor.DarkRed
                 };
                 await e.Context.RespondAsync("", embed: embed);

@@ -5,10 +5,12 @@ using System.Text;
 namespace PotatoBot
 {
     /// <summary>
-    /// Contains static links to all gifs used by potatobot
+    /// Contains static links to all data (mainly images) used by potatobot
     /// </summary>
-    public class GIF
+    public class Links
     {
+        public static string ICON_IMAGE = "https://i.imgur.com/jIdgJ4j.png"; // Backup: https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg
+        public static string PREACH_OK = "https://i.imgur.com/SFmnXiA.png";
 
         public static string[] DANCE_LINKS = {
             "https://rosesturnblog.files.wordpress.com/2014/12/dandy-butt-dancing.gif",

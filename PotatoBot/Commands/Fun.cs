@@ -40,7 +40,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
-                ImageUrl = GIF.DANCE_LINKS[rng.Next(GIF.DANCE_LINKS.Length)]
+                ImageUrl = Links.DANCE_LINKS[rng.Next(Links.DANCE_LINKS.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -66,7 +66,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
-                ImageUrl = GIF.OOO_LINKS[rng.Next(GIF.OOO_LINKS.Length)],
+                ImageUrl = Links.OOO_LINKS[rng.Next(Links.OOO_LINKS.Length)],
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
                 }
@@ -82,7 +82,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
-                ImageUrl = GIF.CUTE_LINKS[rng.Next(GIF.CUTE_LINKS.Length)]
+                ImageUrl = Links.CUTE_LINKS[rng.Next(Links.CUTE_LINKS.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -93,7 +93,7 @@ namespace PotatoBot.Commands
         public async Task Boobies(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = GIF.BOOB_LINKS[rng.Next(GIF.BOOB_LINKS.Length)],
+                ImageUrl = Links.BOOB_LINKS[rng.Next(Links.BOOB_LINKS.Length)],
                 Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -108,7 +108,7 @@ namespace PotatoBot.Commands
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
 
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = GIF.TOTALBISCUIT_LINKS[rng.Next(GIF.TOTALBISCUIT_LINKS.Length)],
+                ImageUrl = Links.TOTALBISCUIT_LINKS[rng.Next(Links.TOTALBISCUIT_LINKS.Length)],
                 Color = DiscordColor.Gray,
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"RIP John Bain, 8th July 1984 - 23th May 2018 {emoji} ",
@@ -124,7 +124,7 @@ namespace PotatoBot.Commands
         public async Task BullShit(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = GIF.BULLSHIT_LINKS[rng.Next(GIF.BULLSHIT_LINKS.Length)],
+                ImageUrl = Links.BULLSHIT_LINKS[rng.Next(Links.BULLSHIT_LINKS.Length)],
                 Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);

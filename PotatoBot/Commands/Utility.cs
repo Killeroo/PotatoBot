@@ -6,6 +6,8 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 
+using PotatoBot.Events;
+
 namespace PotatoBot.Commands
 {
     public class Utility
@@ -21,8 +23,8 @@ namespace PotatoBot.Commands
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":tools:");
             var embed = new DiscordEmbedBuilder {
                 Title = $"{emoji} Status",
-                ImageUrl = "https://i.imgur.com/SFmnXiA.png",
-                ThumbnailUrl = "https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg"
+                ImageUrl = Links.PREACH_OK,
+                ThumbnailUrl = Links.ICON_IMAGE
 
             };
             embed.AddField("Version", Program.VERSION, true);
@@ -183,5 +185,15 @@ namespace PotatoBot.Commands
 
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
+
+        [Command("errors")]
+        [Description("Instructs Potatobot to not display any error messages")]
+        [Aliases("noerrors", "noerrormsg")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task ToggleCommandNotFoundMsg(CommandContext ctx)
+        {
+            StaticEvents.ShowCommandNotFoundMsg = !StaticEvents.ShowCommandNotFoundMsg;
+        }
+
     }
 }

@@ -21,7 +21,7 @@ namespace PotatoBot
         {
             this.EmbedBuilder = new DiscordEmbedBuilder();
             EmbedBuilder.Color = DiscordColor.Goldenrod;
-            EmbedBuilder.ThumbnailUrl = "https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg";
+            EmbedBuilder.ThumbnailUrl = Links.ICON_IMAGE;
             EmbedBuilder.Footer = new DiscordEmbedBuilder.EmbedFooter {
                 Text = "<3 PotatoBot & Pals"
             };
