@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using DSharpPlus;
@@ -29,6 +30,7 @@ namespace PotatoBot.Commands
             };
             embed.AddField("Version", Program.VERSION, true);
             embed.AddField("DSharp Version", ctx.Client.VersionString, true);
+            embed.AddField("Spudule", Process.GetProcessesByName("Spudule").Length != 0 ? "Running" : "Not Running");
             embed.AddField("Ping", ctx.Client.Ping.ToString(), true);
             embed.AddField("Connected to", ctx.Guild.Name.ToString());
             embed.AddField("Server location", ctx.Guild.RegionId, true);
@@ -62,6 +64,10 @@ namespace PotatoBot.Commands
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.7",
+                "- Refactored commands\n" +
+                "- Converted help command to use embeds\n" +
+                "- Added spudule to status");
             embed.AddField("Version 0.6",
                 "- Added urbandictonary command\n" +
                 "- Added karlpilkington command\n" +
