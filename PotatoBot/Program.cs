@@ -23,13 +23,20 @@ namespace PotatoBot
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
 
+        private static string configPath = "config.json";
+        
         // Contains all async events
         private AsyncEvents asyncEvents = new AsyncEvents();
-
+        
         static void Main(string[] args)
         {
             Stats.StartTime = DateTime.Now;
             Stats.PCName = Environment.MachineName;
+
+            // Arguments check
+            if (args.Length > 0) {
+                configPath = args[0];
+            }
 
             // Due to the nature of DSharpPlus, the bot needs to run in async
             // so we pipe out program class through an async method to run
@@ -43,7 +50,7 @@ namespace PotatoBot
             Console.WriteLine($"PotatoBot Version {VERSION}");
 
             // Load config file & configure client
-            ConfigJson cfgjson = ReadConfigFile("config.json");
+            ConfigJson cfgjson = ReadConfigFile(configPath);
             DiscordConfiguration cfg = SetupDiscordConfig(cfgjson);
             Console.WriteLine("Initiating discord client . . . ");
             this.Client = new DiscordClient(cfg);
