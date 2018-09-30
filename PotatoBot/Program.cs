@@ -75,7 +75,7 @@ namespace PotatoBot
             Console.WriteLine($"Reading {path}");
             string data = "";
             try {
-                using (FileStream fs = File.OpenRead("config.json"))
+                using (FileStream fs = File.OpenRead(path))
                 using (StreamReader sr = new StreamReader(fs, new UTF8Encoding(false))) {
                     data = sr.ReadToEnd();
                 }
