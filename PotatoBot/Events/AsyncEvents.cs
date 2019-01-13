@@ -23,15 +23,22 @@ namespace PotatoBot.Events
             // Announce to all text channels in the server
             e.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Member_Updated: {e.Member.Username}: Role position total {totalPosBefore} -> {totalPosAfter}", DateTime.Now);
             foreach (var channel in e.Guild.Channels) {
-                if (channel.Type == ChannelType.Text) {
-                    if (totalPosBefore < totalPosAfter) {
-                        // Promoted 
-                        await channel.TriggerTypingAsync();
-                        await channel.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
-                    } else if (totalPosBefore > totalPosAfter) {
-                        // Demoted
-                        await channel.TriggerTypingAsync();
-                        await channel.SendMessageAsync($"Shame on you {e.Member.Mention}. You have fallen from grace. May the potato Gods have mercy on you...");
+                if (channel.Name == "announcements")
+                {
+                    if (channel.Type == ChannelType.Text)
+                    {
+                        if (totalPosBefore < totalPosAfter)
+                        {
+                            // Promoted 
+                            await channel.TriggerTypingAsync();
+                            await channel.SendMessageAsync($"Congratulations {e.Member.Mention} on your ascention. May you travel far young potato.");
+                        }
+                        else if (totalPosBefore > totalPosAfter)
+                        {
+                            // Demoted
+                            await channel.TriggerTypingAsync();
+                            await channel.SendMessageAsync($"Shame on you {e.Member.Mention}. You have fallen from grace. May the potato Gods have mercy on you...");
+                        }
                     }
                 }
             }

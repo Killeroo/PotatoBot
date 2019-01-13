@@ -36,7 +36,7 @@ namespace PotatoBot
         // Sets the name of the command 
         public IHelpFormatter WithCommandName(string name)
         {
-            this.EmbedBuilder.AddField("Name", name, true);
+            this.EmbedBuilder.AddField("Command Name", name, true);
 
             return this;
         }
@@ -78,8 +78,7 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            EmbedBuilder.AddField("Commands", string.Join("\n", subcommands.Select(xc => xc.Name)));
-
+            EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => xc.Name)));
             return this;
         }
     }
