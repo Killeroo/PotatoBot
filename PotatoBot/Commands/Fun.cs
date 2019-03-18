@@ -6,6 +6,8 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 
+using PotatoBot.Data;
+
 namespace PotatoBot.Commands
 {
     public class Fun
@@ -71,6 +73,7 @@ namespace PotatoBot.Commands
                     Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
                 }
             };
+
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
 
@@ -141,6 +144,18 @@ namespace PotatoBot.Commands
                 Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
+        }
+
+        [Command("fact")]
+        [Description("Get yourself some potato (fact-based) education son.")]
+        [Aliases("potatofacts", "facts", "factets", "potatofact", "factet")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task PotatoFact(CommandContext ctx)
+        {
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":books:");
+
+            await ctx.TriggerTypingAsync();
+            await ctx.RespondAsync(Formatter.Italic(Strings.POTATO_FACTS[rng.Next(Strings.POTATO_FACTS.Length)]));
         }
     }
 }

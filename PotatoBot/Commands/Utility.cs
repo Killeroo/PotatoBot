@@ -64,6 +64,10 @@ namespace PotatoBot.Commands
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("Version 0.8", 
+                "- Added facts command\n" +
+                "- Added delete command\n" +
+                "- Improved help command\n");
             embed.AddField("Version 0.7",
                 "- Refactored commands\n" +
                 "- Converted help command to use embeds\n" +
@@ -201,5 +205,40 @@ namespace PotatoBot.Commands
             StaticEvents.ShowCommandNotFoundMsg = !StaticEvents.ShowCommandNotFoundMsg;
         }
 
+        [Command("delete")]
+        [Description("Deletes X number of messages from the current channel")]
+        [Aliases("dm", "del", "deletemessages")]
+        [RequireRolesAttribute("taytus administratus")]
+        public async Task DeleteMessages(CommandContext ctx, [Description("How many messages to delete")] params string[] messageCount)
+        {
+            int count = 1;
+            
+            // Read number of messages to delete from arguments
+            if (messageCount.Length != 0) {
+                // Convert argument to int
+                try {
+                    count = Convert.ToInt32(messageCount[0]);
+                } catch (Exception) {
+                    // Silently continue on exception
+                    ctx.Client.DebugLogger.LogMessage(LogLevel.Error, "PotatoBot", "Problem converting arguments for delete command.", DateTime.Now);
+                } 
+            }
+
+            // Delete command message
+            await ctx.Message.DeleteAsync();
+
+            // Bounds check
+            if (count > 1000) {
+                count = 1000;
+            } else if (count <= 1) {
+                count = 1;
+            }
+
+            // Retrieve and delete messages
+            var messages = await ctx.Channel.GetMessagesAsync(count);
+            await ctx.Channel.DeleteMessagesAsync(messages);
+
+            ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Deleted {count} messages from #{ctx.Channel.Name}.", DateTime.Now);
+        }
     }
 }

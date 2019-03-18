@@ -10,6 +10,8 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 
+using PotatoBot.Data;
+
 namespace PotatoBot.Commands
 {
     class Games
@@ -72,11 +74,9 @@ namespace PotatoBot.Commands
         {
             Random rng = new Random();
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":8ball:");
-            string[] responses = new string[] {"Signs point to yes.", "Yes.", "Without a doubt.", "As I see it, yes.", "You may rely on it.", "It is decidedly so.", "Yes - definitely.", "It is certain.", "Most likely.", "Outlook good.",
-                                               "Reply hazy, try again.", "Concentrate and ask again.", "Better not tell you now.", "Cannot predict now.", "Ask again later.",
-                                               "My sources say no.", "Outlook not so good.", "Very doubtful.", "My reply is no.", "Don't count on it."};
+
             await ctx.TriggerTypingAsync();
-            await ctx.RespondAsync($"{emoji} My magic 8ball says... '{responses[rng.Next(responses.Length)]}'");
+            await ctx.RespondAsync($"{emoji} My magic 8ball says... '{Strings.MAGIC_EIGHT_BALL_RESPONSES[rng.Next(Strings.MAGIC_EIGHT_BALL_RESPONSES.Length)]}'");
         }
     }
 }

@@ -21,7 +21,6 @@ namespace PotatoBot
         {
             this.EmbedBuilder = new DiscordEmbedBuilder();
             EmbedBuilder.Color = DiscordColor.Goldenrod;
-            EmbedBuilder.ThumbnailUrl = Links.ICON_IMAGE;
             EmbedBuilder.Footer = new DiscordEmbedBuilder.EmbedFooter {
                 Text = "<3 PotatoBot & Pals"
             };
@@ -36,7 +35,7 @@ namespace PotatoBot
         // Sets the name of the command 
         public IHelpFormatter WithCommandName(string name)
         {
-            this.EmbedBuilder.AddField("Command Name", name, true);
+            this.EmbedBuilder.AddField("Command Name", Formatter.Underline(name), true);
 
             return this;
         }
@@ -44,7 +43,7 @@ namespace PotatoBot
         // Sets the description of the command
         public IHelpFormatter WithDescription(string description)
         {
-            this.EmbedBuilder.AddField("Description", description);
+            this.EmbedBuilder.AddField("Description", Formatter.InlineCode(description));
 
             return this;
         }
@@ -70,7 +69,7 @@ namespace PotatoBot
         public IHelpFormatter WithArguments(IEnumerable<CommandArgument> arguments)
         {
             this.EmbedBuilder.AddField("Arguments",
-                string.Join(", ", arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.ToUserFriendlyName()})")));
+                string.Join(", ", arguments.Select(xarg => $"{Formatter.Italic(xarg.Name)} ({xarg.Type.ToUserFriendlyName()})")));
 
             return this;
         }
@@ -78,7 +77,11 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => xc.Name)));
+            EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => Formatter.Bold(xc.Name))));
+            EmbedBuilder.Footer = null;
+            EmbedBuilder.Footer = new DiscordEmbedBuilder.EmbedFooter {
+                Text = "Type '/help *command*' for more info"
+            };
             return this;
         }
     }
