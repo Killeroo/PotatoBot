@@ -9,9 +9,11 @@ namespace PotatoBot
     /// </summary>
     public class Links
     {
+        public static string LUL_IMAGE= "https://i.imgur.com/ULasYGL.png";
         public static string ICON_IMAGE = "https://i.imgur.com/jIdgJ4j.png"; // Backup: https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg
         public static string PREACH_OK = "https://i.imgur.com/SFmnXiA.png";
         public static string URBAN_DICTIONARY = "http://i.imgur.com/nwERwQE.jpg";
+        public static string KARL_PILK_BS = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif";
 
         public static string[] DANCE_LINKS = {
             "https://rosesturnblog.files.wordpress.com/2014/12/dandy-butt-dancing.gif",

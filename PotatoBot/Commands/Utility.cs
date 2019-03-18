@@ -64,6 +64,10 @@ namespace PotatoBot.Commands
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("0.8.5",
+                "- Added spam command" +
+                "- Added ok command" +
+                "- Announce command only posts to #announcements");
             embed.AddField("Version 0.8", 
                 "- Added facts command\n" +
                 "- Added delete command\n" +
@@ -147,7 +151,7 @@ namespace PotatoBot.Commands
             var embed = new DiscordEmbedBuilder {
                 Title = $"{emoji} Announcement",
                 Color = DiscordColor.Orange,
-                Description = Formatter.Bold(annoucement) + " - " + Formatter.Italic(ctx.Member.Username),
+                Description = Formatter.Bold(annoucement) + " \n" + Formatter.Italic(ctx.Member.Username),
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = "Praise be the potato",
                 }
@@ -158,7 +162,7 @@ namespace PotatoBot.Commands
 
             // Send embed to all channels in guild
             foreach (var channel in ctx.Guild.Channels) {
-                if (channel.Type == ChannelType.Text) {
+                if (channel.Type == ChannelType.Text && channel.Name == "announcements") {
                     await channel.TriggerTypingAsync();
                     await channel.SendMessageAsync(embed: embed);
                 }
@@ -239,6 +243,30 @@ namespace PotatoBot.Commands
             await ctx.Channel.DeleteMessagesAsync(messages);
 
             ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Deleted {count} messages from #{ctx.Channel.Name}.", DateTime.Now);
+        }
+
+        [Command("spam")]
+        [Description("Spams a message to every channel in the server")]
+        [Aliases("fuckyou")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task SpamMessage(CommandContext ctx, [Description("What should be spammed")] params string[] message)
+        {
+            string annoucement = string.Join(" ", message);
+            DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":bangbang:");
+            ctx.Client.DebugLogger.LogMessage(LogLevel.Info, "PotatoBot", $"Spamming \"{annoucement}\" to the server", DateTime.Now);
+
+            // Delete command message
+            await ctx.Message.DeleteAsync();
+
+            // Send embed to all channels in guild
+            foreach (var channel in ctx.Guild.Channels)
+            {
+                if (channel.Type == ChannelType.Text)
+                {
+                    await channel.TriggerTypingAsync();
+                    await channel.SendMessageAsync($"{emoji} {Formatter.Bold(annoucement)} {emoji}");
+                }
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 Color = DiscordColor.Gray,
-                ImageUrl = "https://i.imgur.com/ULasYGL.png",
+                ImageUrl = Links.LUL_IMAGE,
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -140,7 +140,7 @@ namespace PotatoBot.Commands
         public async Task KarlPilkington(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                ImageUrl = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif",
+                ImageUrl = Links.KARL_PILK_BS,
                 Color = DiscordColor.Gray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -156,6 +156,20 @@ namespace PotatoBot.Commands
 
             await ctx.TriggerTypingAsync();
             await ctx.RespondAsync(Formatter.Italic(Strings.POTATO_FACTS[rng.Next(Strings.POTATO_FACTS.Length)]));
+        }
+
+        [Command("ok")]
+        [Description("Chill the fuck out bro, its cool.")]
+        [Aliases("k", "oke", "kk", "affirmative", "ye", "yes", "yas")]
+        [RequireRolesAttribute("unbaked one")]
+        public async Task Ok(CommandContext ctx)
+        {
+            var embed = new DiscordEmbedBuilder
+            {
+                Color = DiscordColor.Gray,
+                ImageUrl = Links.PREACH_OK,
+            };
+            await ctx.Channel.SendMessageAsync(embed: embed);
         }
     }
 }
