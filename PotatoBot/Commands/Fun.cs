@@ -41,7 +41,7 @@ namespace PotatoBot.Commands
         public async Task Dance(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 ImageUrl = Links.DANCE_LINKS[rng.Next(Links.DANCE_LINKS.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -54,9 +54,10 @@ namespace PotatoBot.Commands
         public async Task Lol(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 ImageUrl = Links.LUL_IMAGE,
             };
+            
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
 
@@ -67,7 +68,7 @@ namespace PotatoBot.Commands
         public async Task ooo(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 ImageUrl = Links.OOO_LINKS[rng.Next(Links.OOO_LINKS.Length)],
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"{DiscordEmoji.FromName(ctx.Client, ":thermometer:")} {DiscordEmoji.FromName(ctx.Client, ":prayer_beads:")} {DiscordEmoji.FromName(ctx.Client, ":ok_hand:")}",
@@ -84,7 +85,7 @@ namespace PotatoBot.Commands
         public async Task Cute(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 ImageUrl = Links.CUTE_LINKS[rng.Next(Links.CUTE_LINKS.Length)]
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
@@ -97,7 +98,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = Links.BOOB_LINKS[rng.Next(Links.BOOB_LINKS.Length)],
-                Color = DiscordColor.Gray
+                Color = DiscordColor.DarkGray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -112,7 +113,7 @@ namespace PotatoBot.Commands
 
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = Links.TOTALBISCUIT_LINKS[rng.Next(Links.TOTALBISCUIT_LINKS.Length)],
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 Footer = new DiscordEmbedBuilder.EmbedFooter {
                     Text = $"RIP John Bain, 8th July 1984 - 23th May 2018 {emoji} ",
                 }
@@ -141,7 +142,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder {
                 ImageUrl = Links.KARL_PILK_BS,
-                Color = DiscordColor.Gray
+                Color = DiscordColor.DarkGray
             };
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
@@ -166,7 +167,7 @@ namespace PotatoBot.Commands
         {
             var embed = new DiscordEmbedBuilder
             {
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 ImageUrl = Links.PREACH_OK,
             };
             await ctx.Channel.SendMessageAsync(embed: embed);

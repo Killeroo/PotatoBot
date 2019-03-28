@@ -34,7 +34,7 @@ namespace PotatoBot.Commands
             // Display the poll
             var embed = new DiscordEmbedBuilder {
                 Title = "Poll Time!",
-                Color = DiscordColor.Gray,
+                Color = DiscordColor.DarkGray,
                 Description = "Choose your fighter: " + string.Join(" ", pollOptions)
             };
             DiscordMessage msg = await ctx.RespondAsync(embed: embed);
