@@ -15,7 +15,7 @@ namespace PotatoBot.Commands
     {
         [Command("status")]
         [Description("Displays the current state of PotatoBot")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Unbaked One")]
         public async Task Status(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
@@ -25,7 +25,7 @@ namespace PotatoBot.Commands
             var embed = new DiscordEmbedBuilder {
                 Title = $"{emoji} Status",
                 ImageUrl = Links.PREACH_OK,
-                ThumbnailUrl = Links.ICON_IMAGE
+                ThumbnailUrl = Links.POTATOBOT_ICON
 
             };
             embed.AddField("Version", Program.VERSION, true);
@@ -50,7 +50,7 @@ namespace PotatoBot.Commands
         [Command("changelog")]
         [Description("Shows current changes made to potatobot")]
         [Aliases("changes")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Changelog(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
@@ -64,6 +64,11 @@ namespace PotatoBot.Commands
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("0.9.0",
+                "- Added Salt and Salute command" +
+                "- Changed embed colour to be more subtle" +
+                "- Fixed permission" +
+                "- Misc cleanup and refactors to potatobot's core");
             embed.AddField("0.8.5",
                 "- Added spam command" +
                 "- Added ok command" +
@@ -140,7 +145,7 @@ namespace PotatoBot.Commands
         [Command("announce")]
         [Description("Announces a message to the server")]
         [Aliases("say", "tell", "yell", "shout")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Unbaked One")]
         public async Task Announce(CommandContext ctx, [Description("What should be announced")] params string[] message)
         {
             string annoucement = string.Join(" ", message);
@@ -172,7 +177,7 @@ namespace PotatoBot.Commands
         [Command("ping")]
         [Description("Displays potatobot's current ping")]
         [Aliases("pong")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Ping(CommandContext ctx)
         {
             // respond with current ping
@@ -183,7 +188,7 @@ namespace PotatoBot.Commands
         [Command("youtube")]
         [Description("Potatobot calls upon the dark void and summons a mad land where you can watch youtube together")]
         [Aliases("togethertube", "watch", "watch2gether", "yt", "yout00b")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         //TODO: Replace with dynamic room creation like:
         //https://github.com/Kwoth/NadekoBot/blob/f274af8ba20e1630ff663320ca6235114aa8fd46/NadekoBot.Core/Modules/Utility/Utility.cs#L46
         public async Task TogetherTube(CommandContext ctx)
@@ -203,7 +208,7 @@ namespace PotatoBot.Commands
         [Command("errors")]
         [Description("Instructs Potatobot to not display any error messages")]
         [Aliases("noerrors", "noerrormsg")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Unbaked One")]
         public async Task ToggleCommandNotFoundMsg(CommandContext ctx)
         {
             StaticEvents.ShowCommandNotFoundMsg = !StaticEvents.ShowCommandNotFoundMsg;
@@ -212,7 +217,7 @@ namespace PotatoBot.Commands
         [Command("delete")]
         [Description("Deletes X number of messages from the current channel")]
         [Aliases("dm", "del", "deletemessages")]
-        [RequireRolesAttribute("taytus administratus")]
+        [RequireRolesAttribute("Taytus Administratus")]
         public async Task DeleteMessages(CommandContext ctx, [Description("How many messages to delete")] params string[] messageCount)
         {
             int count = 1;
@@ -248,7 +253,7 @@ namespace PotatoBot.Commands
         [Command("spam")]
         [Description("Spams a message to every channel in the server")]
         [Aliases("fuckyou")]
-        [RequireRolesAttribute("unbaked one")]
+        [RequireRolesAttribute("Unbaked One")]
         public async Task SpamMessage(CommandContext ctx, [Description("What should be spammed")] params string[] message)
         {
             string annoucement = string.Join(" ", message);

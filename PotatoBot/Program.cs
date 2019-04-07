@@ -18,7 +18,7 @@ namespace PotatoBot
     class Program
     {
         // Move to other class
-        public const string VERSION = "0.8.5";
+        public const string VERSION = "0.9.0";
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }
@@ -152,6 +152,7 @@ namespace PotatoBot
             this.Commands.RegisterCommands<Utility>();
             this.Commands.RegisterCommands<Searches>();
             this.Commands.RegisterCommands<Games>();
+            this.Commands.RegisterCommands<Emotes>();
 
             // Setup our help command formatter
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupCommands", $"Setting up HelpFormatter", DateTime.Now);

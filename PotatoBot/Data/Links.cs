@@ -9,12 +9,21 @@ namespace PotatoBot
     /// </summary>
     public class Links
     {
-        public static string LUL_IMAGE= "https://i.imgur.com/ULasYGL.png";
-        public static string ICON_IMAGE = "https://i.imgur.com/jIdgJ4j.png"; // Backup: https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg
-        public static string PREACH_OK = "https://i.imgur.com/SFmnXiA.png";
-        public static string URBAN_DICTIONARY = "http://i.imgur.com/nwERwQE.jpg";
-        public static string KARL_PILK_BS = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif";
+        // Icons
+        public static string POTATOBOT_ICON = "https://i.imgur.com/jIdgJ4j.png"; // Backup: https://cdn.dribbble.com/users/174182/screenshots/1462892/glados_teaser.jpg
+        public static string URBAN_DICTIONARY_ICON = "http://i.imgur.com/nwERwQE.jpg";
 
+        // Emotes 
+        public static string LUL_IMAGE = "https://i.imgur.com/ULasYGL.png";
+        public static string OK_IMAGE = "https://i.imgur.com/SFmnXiA.png";
+        public static string SALT_IMAGE = "https://pbs.twimg.com/media/DzEdh2LXQAAV6Cy.jpg";
+        public static string SALUTE_IMAGE = "https://cdn.drawception.com/images/panels/2015/3-24/28nDPjfx73-8.png";
+
+        // Misc
+        public static string KARL_PILK_BS = "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif";
+        public static string PREACH_OK = "https://i.imgur.com/SFmnXiA.png";
+
+        // Collections of images
         public static string[] DANCE_LINKS = {
             "https://rosesturnblog.files.wordpress.com/2014/12/dandy-butt-dancing.gif",
             "https://i.pinimg.com/originals/c3/e0/c2/c3e0c2c8fe4f6358d1c2c5f716096369.gif",
@@ -87,6 +96,18 @@ namespace PotatoBot
             "https://media.giphy.com/media/fW0ZxSrXkqQTe/giphy.gif",
             "https://media.giphy.com/media/yDrdRp8oLy4r6/giphy.gif",
             "https://media.giphy.com/media/yDChhXhGE6Ma4/giphy.gif"
+        };
+
+        public static string[] KARL_PILKINGTON_LINKS = {
+            "https://ih1.redbubble.net/image.470649338.6934/flat,1000x1000,075,f.u2.jpg",
+            "https://i.pinimg.com/originals/2b/97/63/2b97634fd5898112da656dc9cc8f6b4f.jpg",
+            "https://media1.tenor.com/images/17df42b7caee166ab307e180a3b4b7cc/tenor.gif"
+        };
+
+        public static string[] DRAMA_LINKS = {
+            "https://i.ytimg.com/vi/Kb2nMvjxBBM/maxresdefault.jpg",
+            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/12b0324c-411e-4225-bfe3-26a00f9173e3/d9yia6w-3d7cc0d6-9d81-40c7-b2a2-ec00030128ec.jpg/v1/fill/w_894,h_894,q_70,strp/drama_time_tee_by_sakuriik_d9yia6w-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcLzEyYjAzMjRjLTQxMWUtNDIyNS1iZmUzLTI2YTAwZjkxNzNlM1wvZDl5aWE2dy0zZDdjYzBkNi05ZDgxLTQwYzctYjJhMi1lYzAwMDMwMTI4ZWMuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.-l7sgRsTK48pLMfxUS861viNdF6lOH0jj0NEyb5K1hU",
+            "https://cdn.dribbble.com/users/1387203/screenshots/4551776/drama_llama_dribbble.png"
         };
 
         public static string[] COMMANDNOTFOUND_LINKS = {

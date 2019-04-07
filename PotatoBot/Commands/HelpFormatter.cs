@@ -77,7 +77,7 @@ namespace PotatoBot
         // Sets any subcommands used by the command
         public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
-            EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => Formatter.Bold(xc.Name))));
+            EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => Formatter.Bold(xc.Name))));//EmbedBuilder.AddField("Commands", " -> " + string.Join("\n -> ", subcommands.Select(xc => Formatter.Bold(xc.Name) + Formatter.Italic(xc.Description)))); //, subcommands.Select(xd => xd.Description)));
             EmbedBuilder.Footer = null;
             EmbedBuilder.Footer = new DiscordEmbedBuilder.EmbedFooter {
                 Text = "Type '/help *command*' for more info"

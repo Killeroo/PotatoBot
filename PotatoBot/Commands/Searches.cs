@@ -42,7 +42,7 @@ namespace PotatoBot.Commands
                         // Build embed (only use the first result)
                         var embed = new DiscordEmbedBuilder {
                             Color = DiscordColor.Gold,
-                            ThumbnailUrl = Links.URBAN_DICTIONARY,
+                            ThumbnailUrl = Links.URBAN_DICTIONARY_ICON,
                             Author = new DiscordEmbedBuilder.EmbedAuthor {
                                 Name = DiscordEmoji.FromName(ctx.Client, ":books:") + " " + results[0].Word
                             },
