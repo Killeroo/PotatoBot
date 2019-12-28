@@ -77,18 +77,6 @@ namespace PotatoBot.Commands
             await ctx.Channel.SendMessageAsync(embed: embed);
         }
 
-        [Command("boobies")]
-        [Description("Erm... Don't look at me, I didn't program myself...")]
-        [RequireRolesAttribute("Unbaked One")]
-        public async Task Boobies(CommandContext ctx)
-        {
-            var embed = new DiscordEmbedBuilder {
-                ImageUrl = Links.BOOB_LINKS[rng.Next(Links.BOOB_LINKS.Length)],
-                Color = DiscordColor.DarkButNotBlack
-            };
-            await ctx.Channel.SendMessageAsync(embed: embed);
-        }
-
         [Command("tb")]
         [Description("Summon our lord and savior, TotalBiscuit")]
         [Aliases("totalbiscuit", "totalhalibut", "cynicalbrit", "johnbain")]

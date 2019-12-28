@@ -36,13 +36,6 @@ namespace PotatoBot
             "https://i.ytimg.com/vi/8QjGrBipxhU/hqdefault.jpg"
         };
 
-        public static string[] BOOB_LINKS = {
-            "https://media.giphy.com/media/cnQoYYnMyDMLS/giphy.gif",
-            "http://gifimage.net/wp-content/uploads/2018/05/space-dandy-honey-gif-11.gif",
-            "https://i1.kym-cdn.com/photos/images/newsfeed/000/673/939/a52.gif",
-            "https://i.imgur.com/gallery/fQxv6Qr.gif"
-        };
-
         public static string[] CUTE_LINKS = {
             "https://i.imgur.com/dJt6R2m.gif",
             "https://i.redd.it/5mvhyjwspvb11.jpg",
