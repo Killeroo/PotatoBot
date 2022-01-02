@@ -15,7 +15,7 @@ namespace PotatoBot.Commands
     {
         [Command("status")]
         [Description("Displays the current state of PotatoBot")]
-        [RequireRolesAttribute("Unbaked One")]
+        [RequireUserPermissions(Permissions.Administrator)]
         public async Task Status(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
@@ -50,7 +50,7 @@ namespace PotatoBot.Commands
         [Command("changelog")]
         [Description("Shows current changes made to potatobot")]
         [Aliases("changes")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
+        [RequireUserPermissions(Permissions.Administrator)]
         public async Task Changelog(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
@@ -145,7 +145,7 @@ namespace PotatoBot.Commands
         [Command("announce")]
         [Description("Announces a message to the server")]
         [Aliases("say", "tell", "yell", "shout")]
-        [RequireRolesAttribute("Unbaked One")]
+        [RequireUserPermissions(Permissions.Administrator)]
         public async Task Announce(CommandContext ctx, [Description("What should be announced")] params string[] message)
         {
             string annoucement = string.Join(" ", message);
@@ -177,7 +177,6 @@ namespace PotatoBot.Commands
         [Command("ping")]
         [Description("Displays potatobot's current ping")]
         [Aliases("pong")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Ping(CommandContext ctx)
         {
             // respond with current ping
@@ -218,6 +217,7 @@ namespace PotatoBot.Commands
         [Description("Deletes X number of messages from the current channel")]
         [Aliases("dm", "del", "deletemessages")]
         [RequireRolesAttribute("Taytus Administratus")]
+        [RequireUserPermissions(Permissions.Administrator)]
         public async Task DeleteMessages(CommandContext ctx, [Description("How many messages to delete")] params string[] messageCount)
         {
             int count = 1;
@@ -253,7 +253,7 @@ namespace PotatoBot.Commands
         [Command("spam")]
         [Description("Spams a message to every channel in the server")]
         [Aliases("fuckyou")]
-        [RequireRolesAttribute("Unbaked One")]
+        [RequireUserPermissions(Permissions.Administrator)]
         public async Task SpamMessage(CommandContext ctx, [Description("What should be spammed")] params string[] message)
         {
             string annoucement = string.Join(" ", message);

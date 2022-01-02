@@ -20,7 +20,7 @@ namespace PotatoBot.Commands
 
         [Command("poll")]
         [Description("Run a poll with reactions.")]
-        [RequireRolesAttribute("Unbaked One")]
+        //RequireRolesAttribute("Unbaked One")]
         public async Task Poll(CommandContext ctx,
                         [Description("How long the poll should last.")] TimeSpan duration,
                         [Description("What options should the poll have.")] params DiscordEmoji[] options)
@@ -56,7 +56,7 @@ namespace PotatoBot.Commands
         [Command("rtd")]
         [Description("Rolls a dice for a user")]
         [Aliases("roll", "rollthedice")]
-        [RequireRolesAttribute("Unbaked One")]
+        //[RequireRolesAttribute("Unbaked One")]
         public async Task RollTheDice(CommandContext ctx)
         {
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":game_die:");
@@ -68,7 +68,7 @@ namespace PotatoBot.Commands
         [Command("8ball")]
         [Description("Potatobot consults his magic 8ball")]
         [Aliases("future")]
-        [RequireRolesAttribute("Unbaked One")]
+        //[RequireRolesAttribute("Unbaked One")]
         // Source: https://github.com/MonikaDiscord/Monika/blob/71b025237010da9e7c9a914721d9d75e1aad3cc4/modules/fun.py#L93
         public async Task EightBall(CommandContext ctx)
         {

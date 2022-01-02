@@ -15,7 +15,6 @@ namespace PotatoBot.Commands
         [Command("ok")]
         [Description("Chill the fuck out bro, its cool.")]
         [Aliases("k", "oke", "kk", "affirmative", "ye", "yes", "yas")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Ok(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -28,7 +27,6 @@ namespace PotatoBot.Commands
         [Command("lol")]
         [Description("hehehehehehehhe")]
         [Aliases("lel", "lul", "lil", "lewl")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Lol(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -41,7 +39,6 @@ namespace PotatoBot.Commands
         [Command("salt")]
         [Description("Dead sea levels mayte")]
         [Aliases("saltyboy", "salty")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Salt(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -54,7 +51,6 @@ namespace PotatoBot.Commands
         [Command("salute")]
         [Description("Dead sea levels mayte")]
         [Aliases("sir", "yessir")]
-        [RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Salute(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
