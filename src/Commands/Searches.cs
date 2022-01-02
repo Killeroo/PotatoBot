@@ -17,7 +17,6 @@ namespace PotatoBot.Commands
         [Command("urbandictionary")]
         [Description("Instructs Potatobot to search for a term on UrbanDictionary.com")]
         [Aliases("ud", "urbandict", "lookup", "define")]
-        //[RequireRolesAttribute("Unbaked One")]
         // Source: https://github.com/Kwoth/NadekoBot/blob/f274af8ba20e1630ff663320ca6235114aa8fd46/NadekoBot.Core/Modules/Searches/Searches.cs#L529
         public async Task UrbanDictionary(CommandContext ctx, [RemainingText] string query = null)
         {
@@ -67,7 +66,6 @@ namespace PotatoBot.Commands
         [Command("lmgtfy")]
         [Description("Instructs Potatobot to search for a term on UrbanDictionary.com")]
         [Aliases("google", "letmegooglethatforyou")]
-        //[RequireRolesAttribute("Unbaked One")]
         public async Task Lmgtfy(CommandContext ctx, [RemainingText] string query = null)
         {
             // TODO: Fix, totally broken

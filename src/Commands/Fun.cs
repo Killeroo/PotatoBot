@@ -17,7 +17,6 @@ namespace PotatoBot.Commands
         [Command("greetings")]
         [Description("Say hi to potato bot")]
         [Aliases("hi", "yo", "yoyo", "sup")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Greetings(CommandContext ctx)
         {
             string[] greetingsPhrases = {
@@ -37,7 +36,6 @@ namespace PotatoBot.Commands
         [Command("dance")]
         [Description("Instructs PotatoBot to initate dance routines")]
         [Aliases("kickit")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Dance(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -50,7 +48,6 @@ namespace PotatoBot.Commands
         [Command("ooo")]
         [Description("er... ?")]
         [Aliases("urgh", "mmm", "orgasm", "o", "oo")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task ooo(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -67,7 +64,6 @@ namespace PotatoBot.Commands
         [Command("cute")]
         [Description("Show a random cute gif")]
         [Aliases("eyebleech")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task Cute(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -80,7 +76,6 @@ namespace PotatoBot.Commands
         [Command("tb")]
         [Description("Summon our lord and savior, TotalBiscuit")]
         [Aliases("totalbiscuit", "totalhalibut", "cynicalbrit", "johnbain")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task TotalBiscuit(CommandContext ctx)
         {
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":heart:");
@@ -98,7 +93,6 @@ namespace PotatoBot.Commands
         [Command("bullshit")]
         [Description("Potatobot calls it how it is")]
         [Aliases("bs", "horseshiet", "horseshit")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task BullShit(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -111,7 +105,6 @@ namespace PotatoBot.Commands
         [Command("karlpilkington")]
         [Description("Potatobot calls it how it is")]
         [Aliases("kp", "twat", "pilkington")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task KarlPilkington(CommandContext ctx)
         {
             var embed = new DiscordEmbedBuilder {
@@ -124,7 +117,6 @@ namespace PotatoBot.Commands
         [Command("fact")]
         [Description("Get yourself some potato (fact-based) education son.")]
         [Aliases("potatofacts", "facts", "factets", "potatofact", "factet")]
-        //[RequireRolesAttribute("Coverted Solanum", "Unbaked One")]
         public async Task PotatoFact(CommandContext ctx)
         {
             DiscordEmoji emoji = DiscordEmoji.FromName(ctx.Client, ":books:");
