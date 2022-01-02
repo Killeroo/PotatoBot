@@ -18,7 +18,7 @@ namespace PotatoBot
     class Program
     {
         // Move to other class
-        public const string VERSION = "0.9.0";
+        public const string VERSION = "1.0.0";
 
         public DiscordClient Client { get; set; }
         public CommandsNextModule Commands { get; set; }

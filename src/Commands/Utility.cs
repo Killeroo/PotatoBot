@@ -64,6 +64,11 @@ namespace PotatoBot.Commands
                     Text = "Praise be the potato",
                 }
             };
+            embed.AddField("1.0.0",
+                "- Removed old permissions requirements" +
+                "- Added Administrator permissions for utility commands" +
+                "- Removed old callbacks" +
+                "- Updated to dotnet core 5.0");
             embed.AddField("0.9.0",
                 "- Added Salt and Salute command" +
                 "- Changed embed colour to be more subtle" +
