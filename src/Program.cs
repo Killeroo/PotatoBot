@@ -122,10 +122,10 @@ namespace PotatoBot
             Client.DebugLogger.LogMessage(LogLevel.Debug, "SetupClientEvents", $"Hooking up events", DateTime.Now);
             this.Client.Ready += StaticEvents.Client_Ready;
             this.Client.ClientErrored += StaticEvents.Client_Error;
-            this.Client.MessageCreated += StaticEvents.Message_Created;
-            this.Client.GuildAvailable += StaticEvents.Guild_Available;
-            this.Client.GuildMemberAdded += StaticEvents.Guild_Member_Added;
-            this.Client.GuildMemberUpdated += asyncEvents.Guild_Member_Updated;
+            //this.Client.MessageCreated += StaticEvents.Message_Created;
+            //this.Client.GuildAvailable += StaticEvents.Guild_Available;
+            //this.Client.GuildMemberAdded += StaticEvents.Guild_Member_Added;
+            //this.Client.GuildMemberUpdated += asyncEvents.Guild_Member_Updated;
         }
 
         private void SetupCommands(ConfigJson config)
